@@ -1,12 +1,12 @@
 {
-  "name": "Yummy-Jekyll",
-  "description": "Jekyll Theme",
+  "name": "My blogs",
+  "description": "分享技术 记录人生！",
   "main": "",
   "keywords": [
-    "jekyll"
+    "博客"
   ],
   "authors": [
-    "DONG Chuan"
+    "gou fajin"
   ],
   "license": "MIT",
   "homepage": "",
