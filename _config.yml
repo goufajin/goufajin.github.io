@@ -67,7 +67,7 @@ navs:
     label: Spring
     target: _self
 
-  -
+  - 
     href: /about.html
     label: About
     target: _self
