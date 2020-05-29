@@ -56,7 +56,6 @@ navs:
   -
     href: /
     label: Home
-    target: _self
 
   -
     href: /java.html
