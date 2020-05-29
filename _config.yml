@@ -56,18 +56,22 @@ navs:
   -
     href: /
     label: Home
+    target: _self
 
   -
     href: /java.html
     label: Java
+    target: _self
 
   -
     href: /spring.html
     label: Spring
+    target: _self
 
   -
     href: /about.html
     label: About
+    target: _self
 
 # Sidebar to show popular repo
 #喜欢的github仓库fork
