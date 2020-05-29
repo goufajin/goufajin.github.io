@@ -1,9 +1,7 @@
 ---
 layout: default
+title: spring 学习笔记
+css: ['blog-page.css']
+permalink: /spring
 ---
-{% include jumbotron.html %}
-<article class="post container">
-
-    {{ content }}
-
-</article>
+{% include spring.html %}

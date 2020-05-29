@@ -1,9 +1,7 @@
 ---
 layout: default
+title: java 学习笔记
+css: ['blog-page.css']
+permalink: /java
 ---
-{% include jumbotron.html %}
-<article class="post container">
-
-    {{ content }}
-
-</article>
+{% include java.html %}

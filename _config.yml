@@ -58,15 +58,15 @@ navs:
     label: Home
 
   -
-    href: /java
+    href: /java.html
     label: Java
 
   -
-    href: /spring
+    href: /spring.html
     label: Spring
 
   - 
-    href: /about
+    href: /about.html
     label: About
 
 # Sidebar to show popular repo
