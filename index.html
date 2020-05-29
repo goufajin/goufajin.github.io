@@ -33,7 +33,7 @@ css: ['index.css', 'sidebar-popular-repo.css']
         <div class="col-md-8">
 
             <ol class="post-list">
-                {% for post in paginator.java %}
+                {% for post in paginator.posts %}
                 <li class="post-list-item">
                     <h2 class="post-list-title">
                         <a class="hvr-underline-from-center" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
