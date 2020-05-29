@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "spring源码剖析"
+category: spring
 date:   2016-05-13 13:25:35 +0200
-categories: spring
+# categories: spring
 ---
 
 spring 源码剖析
