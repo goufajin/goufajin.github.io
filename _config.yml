@@ -7,7 +7,7 @@
 
 # Site settings
 title: 草根程序员的梦想
-name: Dream
+name: 大自然的搬运工
 email: daligfj@163.com
 github_url: https://github.com/goufajin 
 github_username: goufajin
@@ -65,7 +65,7 @@ navs:
     href: /spring
     label: Spring
 
-    -
+  -
     href: /about
     label: About
 
