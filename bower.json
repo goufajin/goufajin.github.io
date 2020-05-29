@@ -1,12 +1,12 @@
 {
   "name": "blogs",
-  "description": "分享技术 记录人生！",
+  "description": "记录学习点点滴滴",
   "main": "",
   "keywords": [
     "博客"
   ],
   "authors": [
-    "gou fajin"
+    "goufajin"
   ],
   "license": "MIT",
   "homepage": "",
