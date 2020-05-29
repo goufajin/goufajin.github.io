@@ -1,6 +1,6 @@
 ---
 layout: page
-title: java 学习笔记
+title: java
 css: ['blog-page.css']
 permalink: /java
 ---

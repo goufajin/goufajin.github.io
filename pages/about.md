@@ -1,7 +1,7 @@
 ---
 layout: page
-title: java 学习笔记
+title: about me
 css: ['blog-page.css']
-permalink: /java
+permalink: /about
 ---
-{% include java.html %}
+{% include about.html %}

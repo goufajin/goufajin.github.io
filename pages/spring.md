@@ -1,6 +1,6 @@
 ---
-layout: default
-title: spring 学习笔记
+layout: page
+title: spring
 css: ['blog-page.css']
 permalink: /spring
 ---
