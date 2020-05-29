@@ -121,7 +121,7 @@ It specifies if the animation styles are visible before or after the animation p
 * `normal` - Default. The animation does not apply any styles to the element, before or after the animation.
 
 * `forwards` - After the animation is finished, the styles defined in the final keyframe (100%) are retained by the element.
-
+  
 * `backwards` - Before the animation (during the animation delay), the styles of the initial keyframe (0%) are applied to the element.
 
 * `both` - `forwards` with `backwards`.

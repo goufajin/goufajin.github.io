@@ -6,8 +6,8 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: java love spring
-name: Gou fajin
+title: 草根程序员的梦想
+name: Dream
 email: daligfj@163.com
 github_url: https://github.com/goufajin 
 github_username: goufajin
@@ -19,7 +19,7 @@ repository: goufajin/goufajin.github.io
 # For local test, please use http://localhost:4000
 # For production, use your github page url. ex. http://dongchuan.github.io
 url: https://goufajin.github.io
-
+# url:http://localhost:4000
 ## Gem
 gems:
   - jekyll-paginate
@@ -58,22 +58,19 @@ navs:
     label: Home
 
   -
-    href: /open-source
-    label: Open-Source
+    href: /java
+    label: Java
 
   -
-    href: /blog
-    label: Blog
+    href: /spring
+    label: Spring
 
-  -
-    href: /bookmark
-    label: Bookmark
-
-  -
+    -
     href: /about
     label: About
 
 # Sidebar to show popular repo
+#喜欢的github仓库fork
 side_bar_repo_limit: 5 # Number of repos to show
 
 # Google Analytics
@@ -84,7 +81,8 @@ analytics :
 
 
 # For about.html. Fell free to create your own!
-skill_software_keywords: [Java, C, C++, Qt, Python, MySQL, Oracle, SQLite, PL/SQL, Design Patterns]
-skill_j2ee_keywords: [Spring, Struct, Hibernet, MyBatis, JSP]
-skill_web_keywords: [HTML, CSS, JS, JQuery, Ajax, AngularJS, NodeJS, ExpressJS, MongoDB, Redis, PHP, Symfony, Boostrap]
-skill_mobile_app_keywords: [Android, Sketch UI Desgin]
+skill_back_keywords: [Java8,Kotlin,Spring,Spring MVC,SpringBoot, Spring cloud,  Struct2, Hibernet, MyBatis, JSP,Oracle, MySQL,PostgreSQL]
+skill_front_keywords: [HTML, CSS3, H5, JQuery, Ajax, Vue , Boostrap]
+skill_bigdata_keywords: [Hadoop,Spark,Elasticsearch,ELK, ETL,Hive,Hbase]
+skill_mobile_app_keywords: [Android,Swift,Object-C]
+

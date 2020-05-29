@@ -1,5 +1,5 @@
 # 个人博客
-个人技术博客，专注于java、spring领域的技术分享！
+个人技术博客，专注于J2EE Web开发领域的技术分享和交流！
 
 访问地址：https://goufajin.github.io/
 
