@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 草根程序员也有梦想
+title: 一名合格的全栈软件开发工程师
 css: ['blog-page.css']
 permalink: /about
 menu: about
