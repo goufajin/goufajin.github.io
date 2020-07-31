@@ -1,7 +1,21 @@
 ---
 layout: post
-title:  "String剖析"
+title:  "HikariCP源码解读"
 category: java
 date:   2016-05-14 13:25:35 +0200
 ---
-String剖析
+--在github官网拉取最新HikariCp源码
+--导入到开发工具（idea、eclipse）中，配置maven地址和本地仓库
+#开始解读源码：
+1、执行JavassistProxyFactory类生成对应的代理类，例如：HikariProxyConnection、HikariProxyStatement、HikariProxyPreparedStatement、HikariProxyCallableStatement、HikariProxyResultSet、HikariProxyDatabaseMetaData。
+2、运行单元测试，配置HikariConfig参数，跟踪调试HikariDataSource构造器，定位到HikariPool构造器下的代码：
+    2.1、ConcurrentBag变量主要存储connection对象；
+    2.2、checkFailFast()方法执行初始化生成一个connection对象，加入到 connectionBag.add(poolEntry)对象中，此时connectionBag的size为1；
+    2.3、PoolEntry对象中定义为connection对象的引用，即代表connection对象；
+    2.4、ThreadPoolExecutor addConnectionExecutor创建用于调度connection的池，allowCoreThreadTimeOut配置是否核心线程允许超时，设置为true则允许，反正则不
+    2.5、ScheduledFuture<?> houseKeeperTask用于定时调度，执行线程体方法（HouseKeeper-》fillPool（））；
+    2.6、Math.min(config.getMaximumPoolSize() - getTotalConnections(), config.getMinimumIdle() - getIdleConnections())
+                                   - addConnectionQueueReadOnlyView.size();
+    代码用于判断要添加的connection对象为几个，进行后续的for循环，使用addConnectionExecutor提交添加connection对象任务
+    2.7、当有connection对象被使用，根据2.6的判断规则，则会再补齐空闲链接为（MinimumIdle）参数指定的数目（connection）
+    2.8、空闲超时（idleTimeoutMs）
