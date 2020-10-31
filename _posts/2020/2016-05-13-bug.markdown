@@ -1,0 +1,25 @@
+---
+layout: post
+title:  "bug备忘录"
+category: BUG
+date:   2020-10-31 17:48:35 +0200
+---
+**记录前后端bug解决备忘录**
+
+## cas版本3.4.1，客户端使用ip配置时，能正常登出；使用域名时不能正常登出
+- 解决办法： 配置cas客户端应用服务器hosts文件，eg：linux服务器，vi etc/hosts 加入192.168.10.1 example.com.cn 保存退出即可解决登出问题，注意：*** ip和域名为cas认证服务器地址 ***
+
+## 记录一次处理select多选鼠标悬停option回显文字抖动的问题
+- 根源在于使用鼠标的mouseover和mouseout事件造成的；直接给option的titile属性赋值即可解决，具体做可以通过函数动态赋值。如下：
+
+```
+window.onload = function(){
+    var os = $('.name select');
+    for(var i = 0; i < 1; i++){
+        var opt = os[i].options;
+        for(var j = 0; j < opt.length; j++){
+            opt[j].title = opt[i].innerHTML;//主要的在这里
+        }
+    }
+}
+```
