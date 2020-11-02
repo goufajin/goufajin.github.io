@@ -60,11 +60,19 @@ navs:
   -
     href: /java.html
     label: Java
+    -
+      href: /jvm.html
+      label: Jvm
 
   -
     href: /spring.html
     label: Spring
-
+    -
+      href: /springboot.html
+      label: SpringBoot
+    -
+      href: /springcloud.html
+      label: SpringCloud
   - 
     href: /about.html
     label: About
