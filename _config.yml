@@ -77,7 +77,7 @@ navs:
       -
         subHref: /springcloud.html
         subLabel: SpringCloud
-        
+
   - 
     href: /about.html
     label: About
