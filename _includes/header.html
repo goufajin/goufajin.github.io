@@ -5,22 +5,21 @@
         </a>
         <nav class="site-header-nav" role="navigation">
             {% for nav in site.navs %}
-            <div class="{% if page.menu == nav.label %} selected {% endif %} site-header-nav-item hvr-underline-from-center">
-                <a href="{{ nav.href }}"
-                   target="{{ nav.target | default: _self }}"
-                   title="{{ nav.label }}">
-                    {{ nav.label }}
-                </a>
-                {% if nav.subnav %}
-                <ul class="submenu">
-                    {% for subItem in nav.subnav %}
-                    <li><a href="{{ subItem.subHref }}" 
-                           target="{{ subItem.target | default: _self }}"
-                     >{{ subItem.subLabel }}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
+            <a href="{{ nav.href }}"
+               class="{% if page.menu == nav.label %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
+               target="{{ nav.target | default: _self }}"
+               title="{{ nav.label }}">
+                {{ nav.label }}
+            </a>
+            {% if nav.subnav %}
+            <ul class="submenu">
+                {% for subItem in nav.subnav %}
+                <li><a href="{{ subItem.subHref }}" 
+                       target="{{ subItem.target | default: _self }}"
+                 >{{ subItem.subLabel }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
             {% endfor %}
         </nav>
     </div>
