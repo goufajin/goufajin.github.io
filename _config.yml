@@ -66,18 +66,18 @@ navs:
         subHref: /jvm.html
         subLabel: Jvm
 
-
   -
     href: /spring.html
     label: Spring
     target: _self
-    -
-      subHref: /springboot.html
-      subLabel: SpringBoot
-    -
-      subHref: /springcloud.html
-      subLabel: SpringCloud
-    
+    subnav:
+      -
+        subHref: /springboot.html
+        subLabel: SpringBoot
+      -
+        subHref: /springcloud.html
+        subLabel: SpringCloud
+        
   - 
     href: /about.html
     label: About
