@@ -60,20 +60,24 @@ navs:
   -
     href: /java.html
     label: Java
-    -
-      href: /jvm.html
-      label: Jvm
-    -
+    target: _self
+    subnav:
+      -
+        subHref: /jvm.html
+        subLabel: Jvm
+
+
   -
     href: /spring.html
     label: Spring
+    target: _self
     -
-      href: /springboot.html
-      label: SpringBoot
+      subHref: /springboot.html
+      subLabel: SpringBoot
     -
-      href: /springcloud.html
-      label: SpringCloud
-    -
+      subHref: /springcloud.html
+      subLabel: SpringCloud
+    
   - 
     href: /about.html
     label: About
