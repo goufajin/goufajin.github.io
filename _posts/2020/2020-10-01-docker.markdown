@@ -1,0 +1,34 @@
+---
+layout: post
+title:  "docker安装oracle 19.3"
+category: docker
+date:   2020-10-01 13:25:35 +0200
+
+---
+
+docker安装oracle 19.3.0
+
+## 下载官方的dockerfile
+- git clone https://github.com/oracle/docker-images.git [oracle镜像文件目录](/assets/images/oracleDockfileImg.jpg)
+- cd docker-images/OracleDatabase/SingleInstance/dockerfiles
+- [查看oracle dockerfile镜像文件版本](/assets/images/oracleDockfileImgVersion.jpg)
+## 开始安装
+- cd 19.3.0/, cat Dockerfile|grep INSTALL_FILE_1 查看安装包的名称，到oracle官网下载对应包名的版本，这里是： `LINUX.X64_193000_db_home.zip`
+- 将安装包拷贝到`19.3.0/`目录下,eg: `cp 下载的oracle .`
+- 开始安装：./buildDockerImage.sh -v 19.3.0 -e `e表示企业版`
+## 安装完成
+- [success](/assets/images/oracleDockfileSuccess.jpg)
+## 启动oracle19c   
+```
+docker run --name oracle-19c \
+-p 1521:1521 -p 5500:5500 \
+-e ORACLE_SID=goufajin \
+-e ORACLE_PDB=pdb1 \
+-e ORACLE_PWD=aml132 \
+-v /Users/gfj/oracle/oradata/oracle19c:/opt/oracle/oradata \
+oracle/database:19.3.0-ee
+```
+## 查看运行是否正常
+> docker ps | grep oracle
+## 进入命令行界面
+> docker exec -it oracle-19c /bin/bash
