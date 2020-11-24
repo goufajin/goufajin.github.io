@@ -30,5 +30,6 @@ oracle/database:19.3.0-ee
 ```
 ## 查看运行是否正常
 > docker ps | grep oracle
+
 ## 进入命令行界面
 > docker exec -it oracle-19c /bin/bash
