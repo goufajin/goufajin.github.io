@@ -98,4 +98,5 @@ skill_back_keywords: [Java8,Kotlin,Spring,Spring MVC,SpringBoot, Spring cloud,  
 skill_front_keywords: [HTML, CSS3, H5, JQuery, Ajax, Vue , Boostrap]
 skill_bigdata_keywords: [Hadoop,Spark,Elasticsearch,ELK, ETL,Hive,Hbase]
 skill_mobile_app_keywords: [Android,Swift,Object-C]
+categories: [HikariCP,spring-boot,linux,kafka,spring-framework]
 
