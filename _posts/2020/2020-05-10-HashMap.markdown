@@ -1,12 +1,7 @@
 ---
 layout: post
-title:  "mac 配置内外网同时访问"
+title:  "HashMap深度剖析"
 category: java
-date:   2021-04-15 10:25:35 +0200
+date:   2016-05-10 13:25:35 +0200
 ---
-mac 配置内外网同时访问
-
-1.首先打开Mac终端（我的RMBP在Launchpad-其他-终端）
-
-2.查看路由表：netstat -nr
-
+HashMap深度剖析
