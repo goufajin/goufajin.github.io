@@ -1,13 +1,13 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Microsoft YaHei,"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: Microsoft YaHei, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 /** Header **/
-.site-header{
-    padding-top:20px;
-    padding-bottom:20px;
+.site-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 100%;
     position: fixed;
     margin: 40px 0 30px 0;
@@ -30,7 +30,11 @@
     color: #2e2e2e;
     float: left;
 }
-.icon-play{fill: #000;}
+
+.icon-play {
+    fill: #000;
+}
+
 .site-header a {
     text-decoration: none;
 }
@@ -47,25 +51,27 @@
     line-height: 38px;
 }
 
-.site-header-nav{
-    float:right;
+.site-header-nav {
+    float: right;
     margin-bottom: -20px;
 }
 
 .site-header-nav-item {
     color: #000;
-    display:inline-block;
-    padding:10px;
-    margin-left:1.25rem;
+    display: inline-block;
+    padding: 10px;
+    margin-left: 1.25rem;
     font-size: 20px;
 }
 
 /******* Scroll Start *******/
 .site-header {
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.icon-logo.site-header-nav-scrolled {fill: #000;}
+.icon-logo.site-header-nav-scrolled {
+    fill: #000;
+}
 
 .site-header.site-header-nav-scrolled {
     margin: 0;
@@ -83,10 +89,12 @@
 
 /******* Scroll Start on the phone *******/
 .site-header {
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.icon-logo.site-header-nav-scrolled-ph {fill: #000;}
+.icon-logo.site-header-nav-scrolled-ph {
+    fill: #000;
+}
 
 .site-header.site-header-nav-scrolled-ph {
     margin-top: -160px;
@@ -97,6 +105,7 @@
     -o-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
     box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
 }
+
 /******* Scroll End *******/
 
 /** Jumbotron **/
@@ -110,6 +119,7 @@
     color: #fff;
     text-decoration: none;
 }
+
 .jumbotron #jumbotron-meta-info {
     margin-top: 20px;
 }
@@ -135,14 +145,14 @@
 }
 
 /** Footer **/
-.site-footer{
-    position:relative;
-    margin-top:40px;
-    padding:40px 0;
-    font-size:12px;
-    line-height:1.5;
-    color:#777;
-    border-top:2px solid #eee
+.site-footer {
+    position: relative;
+    margin-top: 40px;
+    padding: 40px 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #777;
+    border-top: 2px solid #eee
 }
 
 .site-footer .octicon-mark-github {
@@ -152,7 +162,7 @@
 }
 
 .site-footer .octicon-mark-github:hover {
-    color:#bbb;
+    color: #bbb;
 }
 
 /** Post List **/
@@ -194,40 +204,46 @@
 }
 
 .center {
-  text-align: center;
-  margin: 0 auto;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .center img {
-  max-width: 600px; 
-  height: auto;
+    max-width: 600px;
+    height: auto;
 }
-.site-footer-icons{
+
+.site-footer-icons {
     line-height: 32px;
     text-align: center;
 }
-.site-footer-icons a{
+
+.site-footer-icons a {
     display: inline-block;
     margin: 0 2px;
     vertical-align: middle;
 }
+
 .site-footer-links {
     line-height: 32px;
     text-align: center;
 }
-.site-footer-links a{
+
+.site-footer-links a {
     display: inline-block;
     margin: 0 2px;
     vertical-align: middle;
 }
-.site-footer .scrolltop{
+
+.site-footer .scrolltop {
     position: absolute;
     right: 0;
     top: 50%;
     margin-top: -16px;
     line-height: 32px;
 }
-.site-footer .rss{
+
+.site-footer .rss {
     position: absolute;
     left: 0;
     top: 50%;
@@ -236,21 +252,47 @@
 }
 
 .markdown-body img {
-    max-width: 600px; 
+    max-width: 600px;
     height: auto;
     display: block;
     margin: 0 auto;
 }
-@media (max-width: 640px){
-    .markdown-body img{
+
+@media (max-width: 640px) {
+    .markdown-body img {
         max-width: 100%;
     }
 }
-.archives-list{ list-style: inside; }
-.archives-list:after{ width: 100%; height: 0; font: 0/0 a; content: '.'; clear: both; overflow: hidden; }
-.archives-list li{ width: 50%; line-height: 1.5; float: left; margin: 10px 0; }
-.archives-list li span{ color: #666; }
-.archives-list h3{ clear: both; margin: 0; padding: 20px 0 10px; }
+
+.archives-list {
+    list-style: inside;
+}
+
+.archives-list:after {
+    width: 100%;
+    height: 0;
+    font: 0/0 a;
+    content: '.';
+    clear: both;
+    overflow: hidden;
+}
+
+.archives-list li {
+    width: 50%;
+    line-height: 1.5;
+    float: left;
+    margin: 10px 0;
+}
+
+.archives-list li span {
+    color: #666;
+}
+
+.archives-list h3 {
+    clear: both;
+    margin: 0;
+    padding: 20px 0 10px;
+}
 
 blockquote {
     font-size: 15.5px;
@@ -261,11 +303,13 @@ blockquote {
     padding: 0;
     overflow: visible;
 }
+
 .site-header-nav-item > a {
     display: block;
     padding: 10px;
     color: #000;
 }
+
 .site-header-nav-item .submenu {
     display: none;
     position: absolute;
@@ -281,30 +325,37 @@ blockquote {
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .site-header-nav-item .submenu li {
     font-size: 16px;
     color: #333;
     text-align: center;
     border-bottom: 1px solid #dcdcdc;
 }
+
 .site-header-nav-item .submenu li:last-child {
     border-bottom: none;
 }
+
 .site-header-nav-item .submenu li a {
     padding: 10px;
     display: block;
     color: #333;
 }
+
 .site-header-nav-item .submenu li:first-child a {
     border-radius: 5px 5px 0 0;
 }
+
 .site-header-nav-item .submenu li:last-child a {
     border-radius: 0 0 5px 5px;
 }
+
 .site-header-nav-item .submenu li a:hover {
     color: #4183c4 !important;
     background: #f6f6f6;
 }
+
 .site-header-topbar {
     position: absolute;
     left: 0;
@@ -313,39 +364,42 @@ blockquote {
     z-index: 10;
     padding: 10px 0;
 }
+
 .topbar-menu {
     float: right;
     font-size: 14px;
     line-height: 20px;
 }
+
 .topbar-menu .item {
     display: inline-block;
     margin-left: 15px;
 }
-.topbar-menu .item a{
+
+.topbar-menu .item a {
     color: #fff !important;
 }
 
 .asb-post-01 {
- position: absolute;
- left: 0;
- bottom: 0;
- width: 100%;
- display: none;
- z-index: 10000;
-margin-bottom: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: none;
+    z-index: 10000;
+    margin-bottom: 0;
 }
 
 .asb-post-01 .mask {
- height: 240px;
- width: 100%;
- background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+    height: 240px;
+    width: 100%;
+    background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0)), to(#fff));
 }
 
 .asb-post-01 .info {
- background: white;
- height: 370px;
- text-align: center;
+    background: white;
+    height: 370px;
+    text-align: center;
 }
 
 .lock {

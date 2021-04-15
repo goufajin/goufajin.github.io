@@ -4,7 +4,10 @@
     padding-left: 30px;
     border-left: 8px solid #4183c4;
 }
-.icon-logo{fill: #000;}
+
+.icon-logo {
+    fill: #000;
+}
 
 #posts-list li {
     margin: 40px 0;
@@ -72,6 +75,7 @@
     -webkit-transition-property: transform;
     transition-property: transform;
 }
+
 .bubble-float-left:before {
     position: absolute;
     z-index: -1;
@@ -86,11 +90,13 @@
     -webkit-transition-property: transform;
     transition-property: transform;
 }
+
 .bubble-float-left:hover, .bubble-float-left:focus, .bubble-float-left:active {
     border-color: transparent #4183c4 transparent transparent;
     -webkit-transform: translateX(10px);
     transform: translateX(10px);
 }
+
 .bubble-float-left:hover:before, .bubble-float-left:focus:before, .bubble-float-left:active:before {
     border-color: transparent #4183c4 transparent transparent;
     -webkit-transform: translateX(-20px);
@@ -98,5 +104,5 @@
 }
 
 .col-md-9 {
-     padding-left:60px;
+    padding-left: 60px;
 }

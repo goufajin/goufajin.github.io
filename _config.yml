@@ -9,11 +9,11 @@
 title: 走的路远了，眼前地路近了！
 name: Spring@Java
 email: daligfj@163.com
-github_url: https://github.com/goufajin 
+github_url: https://github.com/goufajin
 github_username: goufajin
 description: 技术博客，记录java，spring框架学习历程
-favicon: favicon.png 
-repository: goufajin/goufajin.github.io 
+favicon: favicon.png
+repository: goufajin/goufajin.github.io
 
 # The base hostname & protocol for your site
 # For local test, please use http://localhost:4000
@@ -53,33 +53,26 @@ paginate_path: 'page:num'
 
 # Navigation. If you do not like these modules, just remove them :D
 navs:
-  -
-    href: /
+  - href: /
     label: Home
 
-  -
-    href: /java.html
+  - href: /java.html
     label: Java
     target: _self
     subnav:
-      -
-        subHref: /jvm.html
+      - subHref: /jvm.html
         subLabel: Jvm
 
-  -
-    href: /spring.html
+  - href: /spring.html
     label: Spring
     target: _self
     subnav:
-      -
-        subHref: /springboot.html
+      - subHref: /springboot.html
         subLabel: SpringBoot
-      -
-        subHref: /springcloud.html
+      - subHref: /springcloud.html
         subLabel: SpringCloud
 
-  - 
-    href: /about.html
+  - href: /about.html
     label: About
 
 # Sidebar to show popular repo
@@ -87,10 +80,10 @@ navs:
 side_bar_repo_limit: 5 # Number of repos to show
 
 # Google Analytics
-analytics :
-  provider : google
-  google :
-      tracking_id : 'tracking_id'  # ex. UA-72165600-X
+analytics:
+  provider: google
+  google:
+    tracking_id: 'tracking_id'  # ex. UA-72165600-X
 
 
 # For about.html. Fell free to create your own!

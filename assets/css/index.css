@@ -1,9 +1,10 @@
 /** Only for index.html **/
 
-.site-header{
+.site-header {
     color: #fff;
     background: #4183c4;
 }
+
 .site-header #site-header-brand {
     color: #fff;
 }
@@ -15,7 +16,10 @@
 .site-header a:hover {
     color: #fff;
 }
-.icon-logo{fill: #fff;}
+
+.icon-logo {
+    fill: #fff;
+}
 
 .jumbotron {
     background: #4183c4;
