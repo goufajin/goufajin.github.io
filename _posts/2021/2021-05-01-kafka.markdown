@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "kafka"
+title:  "Kafka 官网文档解读、最佳实战"
 category: kafka
 date:   2021-5-1 16:55:35 +0200
 ---
