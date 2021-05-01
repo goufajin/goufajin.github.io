@@ -71,7 +71,17 @@ navs:
         subLabel: SpringBoot
       - subHref: /springcloud.html
         subLabel: SpringCloud
-
+  
+  - href: /java.html
+    label: 大数据
+    target: _self
+    subnav:
+      - subHref: /hadoop.html
+        subLabel: Hadoop
+      - subHref: /kafka.html
+        subLabel: Kafka
+      - subHref: /zookeeper.html
+        subLabel: ZooKeeper
   - href: /about.html
     label: About
 
@@ -87,9 +97,9 @@ analytics:
 
 
 # For about.html. Fell free to create your own!
-skill_back_keywords: [Java8,Kotlin,Spring,Spring MVC,SpringBoot, Spring cloud,  Struct2, Hibernet, MyBatis, JSP,Oracle, MySQL,PostgreSQL]
-skill_front_keywords: [HTML, CSS3, H5, JQuery, Ajax, Vue , Boostrap]
-skill_bigdata_keywords: [Hadoop,Spark,Elasticsearch,ELK, ETL,Hive,Hbase]
+skill_back_keywords: [Java8,Kotlin,Spring,Spring MVC,SpringBoot, Spring Cloud,  Struct2, Hibernet, MyBatis, JSP,Oracle, MySQL,PostgreSQL]
+skill_front_keywords: [HTML,CSS3,Boostrap,JavaScript,H5, JQuery, Ajax, Vue, Element-Ui ]
+skill_bigdata_keywords: [Hadoop,Kafka,ZooKeeper,Spark,Elasticsearch,Hive,Hbase]
 skill_mobile_app_keywords: [Android,Swift,Object-C]
-categories: [HikariCP,spring-boot,linux,kafka,spring-framework]
+categories: [HikariCP,Spring-Boot,Linux,Kafka,Spring-Framework]
 
