@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "kafka"
-category: Kafka
+category: kafka
 date:   2021-5-1 16:55:35 +0200
 ---
 
