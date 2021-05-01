@@ -18,19 +18,20 @@ Kafka能够收集数据库数据、物联网数据、移动设备、云服务、
 - The Kafka [Connect API](https://kafka.apache.org/documentation.html#connect) to build and run reusable data import/export connectors that consume (read) or produce (write) streams of events from and to external systems and applications so they can integrate with Kafka. For example, a connector to a relational database like PostgreSQL might capture every change to a set of tables. However, in practice, you typically don't need to implement your own connectors because the Kafka community already provides hundreds of ready-to-use connectors.
 
 #个人理解划的草图：
-
+```
                  Broker
-  Topic          Topic           \.\.\.              Topic看做文件系统的文件夹，事件看出一个个文件
-|\-\-\-\-\-\-\-\-\-\-|   |\-\-\-\-\-\-\-\-\-\-|    |\-\-\-\-\-\-\-\-\-\-|
+  Topic          Topic           ...              Topic看做文件系统的文件夹，事件看出一个个文件
+|----------|   |----------|    |----------|
 | P1|P2|Pn |   | P1|P2|Pn |    | P1|P2|Pn |       P 一个个顺序写的数据块，可以跨Broker存储
-|\-\-\-\-\-\-\-\-\-\-|   |\-\-\-\-\-\-\-\-\-\-|    |\-\-\-\-\-\-\-\-\-\-|
+|----------|   |----------|    |----------|
                     
                    
-    消费者组            消费者组                 \.\.\.
-|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-| 
-| 消费者|消费者|\.\.\.|  | 消费者|消费者|\.\.\.|  |消费者|消费者|\.\.\.|
-|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|
+    消费者组            消费者组                 ...
+|----------------|  |----------------|  |---------------| 
+| 消费者|消费者|...|  | 消费者|消费者|...|  |消费者|消费者|...|
+|----------------|  |----------------|  |---------------|
 
+```
 > 可以有多个Brokers、多个topics、多个消费组；一个消费者组就是队列来使用了。
 
 ## 案例
