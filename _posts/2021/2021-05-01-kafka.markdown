@@ -11,25 +11,25 @@ Kafka能够收集数据库数据、物联网数据、移动设备、云服务、
 
 [kafka官方文档](https://kafka.apache.org/documentation/)
 ## 5个核心API对java和scala
-> The [Admin API](https://kafka.apache.org/documentation.html#adminapi) to manage and inspect topics, brokers, and other Kafka objects.
-> The [Producer API](https://kafka.apache.org/documentation.html#producerapi) to publish (write) a stream of events to one or more Kafka topics.
-> The [Consumer API](https://kafka.apache.org/documentation.html#consumerapi) to subscribe to (read) one or more topics and to process the stream of events produced to them.
-> The [Kafka Streams API](https://kafka.apache.org/documentation/streams/) to implement stream processing applications and microservices. It provides higher-level functions to process event streams, including transformations, stateful operations like aggregations and joins, windowing, processing based on event-time, and more. Input is read from one or more topics in order to generate output to one or more topics, effectively transforming the input streams to output streams.
-> The Kafka [Connect API](https://kafka.apache.org/documentation.html#connect) to build and run reusable data import/export connectors that consume (read) or produce (write) streams of events from and to external systems and applications so they can integrate with Kafka. For example, a connector to a relational database like PostgreSQL might capture every change to a set of tables. However, in practice, you typically don't need to implement your own connectors because the Kafka community already provides hundreds of ready-to-use connectors.
+- The [Admin API](https://kafka.apache.org/documentation.html#adminapi) to manage and inspect topics, brokers, and other Kafka objects.
+- The [Producer API](https://kafka.apache.org/documentation.html#producerapi) to publish (write) a stream of events to one or more Kafka topics.
+- The [Consumer API](https://kafka.apache.org/documentation.html#consumerapi) to subscribe to (read) one or more topics and to process the stream of events produced to them.
+- The [Kafka Streams API](https://kafka.apache.org/documentation/streams/) to implement stream processing applications and microservices. It provides higher-level functions to process event streams, including transformations, stateful operations like aggregations and joins, windowing, processing based on event-time, and more. Input is read from one or more topics in order to generate output to one or more topics, effectively transforming the input streams to output streams.
+- The Kafka [Connect API](https://kafka.apache.org/documentation.html#connect) to build and run reusable data import/export connectors that consume (read) or produce (write) streams of events from and to external systems and applications so they can integrate with Kafka. For example, a connector to a relational database like PostgreSQL might capture every change to a set of tables. However, in practice, you typically don't need to implement your own connectors because the Kafka community already provides hundreds of ready-to-use connectors.
 
 #个人理解划的草图：
 
                  Broker
-  Topic          Topic           ...              Topic看做文件系统的文件夹，事件看出一个个文件
-|----------|   |----------|    |----------|
+  Topic          Topic           \.\.\.              Topic看做文件系统的文件夹，事件看出一个个文件
+|\-\-\-\-\-\-\-\-\-\-|   |\-\-\-\-\-\-\-\-\-\-|    |\-\-\-\-\-\-\-\-\-\-|
 | P1|P2|Pn |   | P1|P2|Pn |    | P1|P2|Pn |       P 一个个顺序写的数据块，可以跨Broker存储
-|----------|   |----------|    |----------|
+|\-\-\-\-\-\-\-\-\-\-|   |\-\-\-\-\-\-\-\-\-\-|    |\-\-\-\-\-\-\-\-\-\-|
                     
                    
-    消费者组            消费者组                 ...
-|----------------|  |----------------|  |---------------| 
-| 消费者|消费者|...|  | 消费者|消费者|...|  |消费者|消费者|...|
-|----------------|  |----------------|  |---------------|
+    消费者组            消费者组                 \.\.\.
+|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-| 
+| 消费者|消费者|\.\.\.|  | 消费者|消费者|\.\.\.|  |消费者|消费者|\.\.\.|
+|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|  |\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-|
 
 > 可以有多个Brokers、多个topics、多个消费组；一个消费者组就是队列来使用了。
 
@@ -46,8 +46,10 @@ Kafka能够收集数据库数据、物联网数据、移动设备、云服务、
 ### 3、用户网页行为追踪
 > The original use case for Kafka was to be able to rebuild a user activity tracking pipeline as a set of real-time publish-subscribe feeds. This means site activity (page views, searches, or other actions users may take) is published to central topics with one topic per activity type. These feeds are available for subscription for a range of use cases including real-time processing, real-time monitoring, and loading into Hadoop or offline data warehousing systems for offline processing and reporting.
 > Activity tracking is often very high volume as many activity messages are generated for each user page view.
+
 ### 4、统计分析
 > Kafka is often used for operational monitoring data. This involves aggregating statistics from distributed applications to produce centralized feeds of operational data.
+
 ### 5、日志聚合
 > Many people use Kafka as a replacement for a log aggregation solution. Log aggregation typically collects physical log files off servers and puts them in a central place (a file server or HDFS perhaps) for processing. Kafka abstracts away the details of files and gives a cleaner abstraction of log or event data as a stream of messages. This allows for lower-latency processing and easier support for multiple data sources and distributed data consumption. In comparison to log-centric systems like Scribe or Flume, Kafka offers equally good performance, stronger durability guarantees due to replication, and much lower end-to-end latency.
 通过分析用户的行为，在电商领域可以做定向的推送、数据预热等；管理系统领域，可以用于分布式微服务日志收集，便于错误排查，日志归档等
