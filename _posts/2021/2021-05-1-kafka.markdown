@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "kafka实战"
+category: kafka
+date:   2021-05-02 13:25:35 +0200
+---
+kafka实战
+
+## 1、Broker Configs
+
+### The essential configurations are the following:
+- broker.id
+- log.dirs
+- zookeeper.connect
+
+## 2、创建topic
+```
+ bin/`kafka-topics.sh` --bootstrap-server localhost:9092 --create --topic my-topic --partitions 1 \
+      --replication-factor 1 --config max.message.bytes=64000 --config flush.messages=1
+```
+### 2.1、修改配置
+```
+ bin/`kafka-configs.sh` --bootstrap-server localhost:9092 --entity-type topics --entity-name my-topic
+      --alter --add-config max.message.bytes=128000
+```
+### 2.2、查看配置
+```
+   bin/`kafka-configs.sh` --bootstrap-server localhost:9092 --entity-type topics --entity-name my-topic --describe
+```
+### 2.3、删除配置
+```
+ bin/kafka-configs.sh --bootstrap-server localhost:9092  --entity-type topics --entity-name my-topic
+      --alter --delete-config max.message.bytes
+```
+
+## 3、 配置生产者
+```
+key.serializer
+Serializer class for key that implements the org.apache.kafka.common.serialization.Serializer interface.
+
+Type:	class
+Default:	
+Valid Values:	
+Importance:	high
+
+```
+
+```
+value.serializer
+Serializer class for value that implements the org.apache.kafka.common.serialization.Serializer interface.
+
+Type:	class
+Default:	
+Valid Values:	
+Importance:	high
+```
+
+### 3.1、bootstrap.servers
+A list of host/port pairs to use for establishing the initial connection to the Kafka cluster.
+eg:form host1:port1,host2:port2,...
+## 消费者的配置类似生产者的配置
