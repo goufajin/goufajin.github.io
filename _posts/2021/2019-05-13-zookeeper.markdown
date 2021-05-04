@@ -1,0 +1,47 @@
+---
+layout: post
+title:  "hadoop 官方文档解读"
+category: hadoop
+date:   2021-05-4 23:55:35 +0200
+---
+
+## hadoop 是分布式文件存储和分布式运算采用普通的机器即可部署可容错、扩展集群；hadoop采用java实现的，可以部署在任意机器上；高度可以配置，大的集群需要调优配置；支持像shell一样的命令行；NameNode和DataNode都有对应的文本界面，方便查看当前集群的状态；
+
+NameNode：前端访问页面 http://namenode-name:9870/
+
+
+## hadoop新特性：
+- Hadoop, including HDFS, is well suited for distributed storage and distributed processing using commodity hardware. It is fault tolerant, scalable, and extremely simple to expand. MapReduce, well known for its simplicity and applicability for large set of distributed applications, is an integral part of Hadoop.
+
+- HDFS is highly configurable with a default configuration well suited for many installations. Most of the time, configuration needs to be tuned only for very large clusters.
+
+- Hadoop is written in Java and is supported on all major platforms.
+
+- Hadoop supports shell-like commands to interact with HDFS directly.
+
+- The NameNode and Datanodes have built in web servers that makes it easy to check current status of the cluster.
+
+- New features and improvements are regularly implemented in HDFS. The following is a subset of useful features in HDFS:
+
+    - File permissions and authentication.
+
+    - Rack awareness: to take a node’s physical location into account while scheduling tasks and allocating storage.
+
+    - Safemode: an administrative mode for maintenance.
+
+    - fsck: a utility to diagnose health of the file system, to find missing files or blocks.
+
+    - fetchdt: a utility to fetch DelegationToken and store it in a file on the local system.
+
+    -  Balancer: tool to balance the cluster when the data is unevenly distributed among DataNodes.
+
+    -  Upgrade and rollback: after a software upgrade, it is possible to rollback to HDFS’ state before the upgrade in case of unexpected problems.
+
+    - Secondary NameNode: performs periodic checkpoints of the namespace and helps keep the size of file containing log of HDFS modifications within certain limits at the NameNode.
+
+    - Checkpoint node: performs periodic checkpoints of the namespace and helps minimize the size of the log stored at the NameNode containing changes to the HDFS. Replaces the role previously filled by the Secondary NameNode, though is not yet battle hardened. The NameNode allows multiple Checkpoint nodes simultaneously, as long as there are no Backup nodes registered with the system.
+
+    - Backup node: An extension to the Checkpoint node. In addition to checkpointing it also receives a stream of edits from the NameNode and maintains its own in-memory copy of the namespace, which is always in sync with the active NameNode namespace state. Only one Backup node may be registered with the NameNode at once.
+
+
+[用户指导](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html)
