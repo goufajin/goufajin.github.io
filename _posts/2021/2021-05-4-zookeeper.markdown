@@ -2,7 +2,7 @@
 layout: post
 title:  "zookeeper 官方文档解读"
 category: zookeeper
-date:   2019-0513 23:55:35 +0200
+date:   2019-05-13 23:55:35 +0200
 ---
 
 zookeeper管理 for synchronization, configuration maintenance, and groups and naming，zookeeper数据是存储在内存中，因而有好的性能（吞吐量）和低延迟。
