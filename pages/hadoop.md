@@ -1,8 +1,8 @@
 ---
 layout: page
-title: zookeeper 官网文档解读、最佳实战
+title: hadoop 官网文档解读、最佳实战
 css: ['blog-page.css']
-permalink: /zookeeper
-menu: zookeeper
+permalink: /hadoop
+menu: hadoop
 ---
-{% include zookeeper.html %}
+{% include hadoop.html %}
