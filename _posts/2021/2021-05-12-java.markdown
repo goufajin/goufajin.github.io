@@ -12,7 +12,7 @@ java所有的异常类都继承Throwable类，有Exception异常和Error异常�
 ## 2、Exception异常
 ### 2.1、Exception异常分为检查型异常和非检查型异常，
 #### 2.1.1、非检查型异常：如RuntimeException异常及其子类，
-##### 这类异常实践中直接在方法或构造器中直接抛出，或者传播到自己继承的RuntimeException子类处理（更加具有面向对象编程的思想，异常类见名知义），如下代码片段所示。
+##### 这类异常实践中直接在方法或构造器中直接抛出，或者传播到自己继承的RuntimeException子类处理（更加具有面向对象编程的思想，异常类见名知义），常见的如：IllegalArgumentException、如下代码片段所示。
 ```
  catch (ClassNotFoundException e){
     throw new RuntimeException("Unexpected exception", e);
@@ -25,4 +25,4 @@ java所有的异常类都继承Throwable类，有Exception异常和Error异常�
     }
 ```
 #### 2.1.2、检查型异常：除RuntimeException异常及其子类外，都是检查型异常，在程序中需要显示的处理，不然编译过不了
-#### @Transactional 事务注解默认对检查型异常不做回滚处理，可以指定rollbackOn属性对需要回滚的异常做定制，如果都要捕获，建议写成Exception，这样检查和非检查异常都实现回滚，如： @Transactional(rollbackFor = Exception.class) 非检查型异常如：数组越界异常等 
+#### @Transactional 事务注解默认对检查型异常不做回滚处理，可以指定rollbackOn属性对需要回滚的异常做定制，如果都要捕获，建议写成Exception，这样检查和非检查异常都实现回滚，如： @Transactional(rollbackFor = Exception.class) 非检查型异常如：数组越界异常等  比如：IOException、AccessException、ServletException、ClassNotFoundException等等除RuntimeException及其子类外的异常都是检查型异常。
