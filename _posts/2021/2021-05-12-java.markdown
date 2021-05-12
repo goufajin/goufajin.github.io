@@ -36,4 +36,4 @@ java所有的异常类都继承Throwable类，有Exception异常和Error异常�
  static Class<?> loadClass(String className, Class<?> callingClass)
         throws ClassNotFoundException {
 ```
-总之检查型异常是你知道做什么，可以选择捕获或者抛出去等逻辑处理，而RuntimeException异常则是必须要抛出处理的。
+总之检查型异常是你知道做什么，可以选择捕获或者抛出去等逻辑处理，上层捕获后在做相应的处理逻辑。而RuntimeException异常则是必须要抛出处理的。
