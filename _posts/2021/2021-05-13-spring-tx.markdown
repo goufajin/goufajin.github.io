@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "spring事务传播级别"
+category: spring
+date:   2021-5-13 23:55:35 +0200
+---
+## spring有REQUIRED、REQUIRED_NEW、SUPPORTS、MANDATORY、NOT_SUPPORTED、NEVER、NESTED 总共7种传播级别，使用注解@Transactional修饰的方法，就是一个事务，要么都成功，要么都不成功，这就是事务！
+
+## 传播级别如下：
+### REQUIRED
+> spring `默认的传播级别`，自始至终都参与在一个事务上下文。
+### REQUIRED_NEW
+> 悬浮当前事务上下文，重新创建一个新的事务上下文。
+### SUPPORTS
+> 如果没有一个当前事务上下文，则不执行事务控制；否则参与在当前事务上下文中。
+### MANDATORY
+> 只支持当前事务上下文，如果不存在则抛出异常
+### NOT_SUPPORTED
+> 如果当前事务上下文存在则悬浮，执行没有事务控制的代码块。
+### NEVER
+> 执行没有事务控制的代码块，如果一个事务上下文存在则抛出异常。
+### NESTED
+> 执行在一个嵌套的事务上下文，和REQUIRED相似。

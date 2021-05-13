@@ -2,7 +2,7 @@
 layout: post
 title:  "java Exception 和 RuntimeException 异常"
 category: java
-date:   2021-5-13 23:55:35 +0200
+date:   2021-5-12 23:55:35 +0200
 ---
 
 java所有的异常类都继承Throwable类，有Exception异常和Error异常。
@@ -25,7 +25,7 @@ java所有的异常类都继承Throwable类，有Exception异常和Error异常�
     }
 ```
 #### 2.1.2、检查型异常：除RuntimeException异常及其子类外，都是检查型异常，在程序中需要显示的处理，不然编译过不了
-##### @Transactional 事务注解默认对检查型异常不做回滚处理，可以指定rollbackOn属性对需要回滚的异常做定制，如果都要捕获，建议写成Exception，这样检查型和非检查型异常都实现回滚，如： @Transactional(rollbackFor = Exception.class)   比如：IOException、AccessException、ServletException、ClassNotFoundException等等除RuntimeException及其子类外的异常都是检查型异常。这类异常的处理通常是直接在方法后或者构造器后throws传播到外面的方法或者构造器，实践中如下处理
+##### 比如：IOException、AccessException、ServletException、ClassNotFoundException等等除RuntimeException及其子类外的异常都是检查型异常。这类异常的处理通常是直接在方法后或者构造器后throws传播到外面的方法或者构造器，实践中如下处理
 ```
  catch (ClassNotFoundException ex2) {
                     // Do nothing, just fall through
