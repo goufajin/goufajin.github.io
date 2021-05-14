@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "spring-guides"
+title:  "使用spring构建一个RESTFul接口"
 category: spring
 date:   2021-04-28 21:25:35 +0200
 ---
