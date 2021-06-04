@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "spring概述"
+category: spring
+date:   2021-1-1 23:55:35 +0200
+---
+spring 框架有着广泛的应用场景，并且是开源的，有巨大的活跃的社区提供持续的反馈在全世界范围不同使用场景下   
+
+### 设计理念
+- api的设计，在版本之间保持最下的改动
+- 高质量的代码
+- 向后兼容性
+-
+
+### 怎样反馈和贡献
+> 查找已经反馈过的问题，在Stack Overflow上，通过spring、spring-aop、spring-mvc标签进行检索；
+> 在github上issue栏进行反馈自己的问题，前提是你确认这是一个问题；
+> 如果你知道怎么解决issue上提交的问题，在pull request
+
+### 开始spring
+> 快速springboot项目，他是基于spring框架的，约定优于配置，让你快速的创建一个spring项目。
