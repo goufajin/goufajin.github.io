@@ -1,0 +1,24 @@
+---
+layout: post
+title:  "spring官网文档解读"
+category: spring
+date:   2021-6-4 23:55:35 +0200
+---
+IoC是spring框架的核心技术，AOP是IoC的一个应用案例，spring-aop可以解决java企业应用中80%的场景。spring集成最成熟的AspectJ（aop的增强） 
+
+## 1、IoC容器
+### 1.1、Spring Ioc容器和beans
+Spring Ioc即控制反转，也被称为依赖注入dependency injection (DI)，通过定义对象的依赖关系，在创建对象的时候，容器注入它的依赖，可以通过属性、构造器参数、工厂方法参数注入依赖对象。
+
+org.springframework.beans 和 org.springframework.context 两个包是Spring Ioc容器的基础包，` BeanFactory` 接口提供一种先进地机制来管理各种类型的对象，`ApplicationContext`是BeanFactory的一个子接口，它增加如下的能力：
+- 容易集成spring-aop特性
++ Message resource 处理（国际化） 
+- Event应用
+- 应用层面指定contexts，例如：在web应用环境中，`WebApplicationContext`
+简而言之，`BeanFactory`提供结构框架和基础功能，`ApplicationContext`提供更多企业级指定的功能，`ApplicationContext`是`BeanFactory`的一个超集，接下来将使用`ApplicationContext`来描述Ioc容器
+
+在Spring中 对象组成了应用的骨架，通过IoC管理。故Spring IoC被称作beans，即：Spring IoC容器管理应用的beans。一个bean就是一个对象，实例化、装配都是通过Spring IoC管理。反之，一个简单地bean是你应用中许多对象中的一个，他们相互依赖，通过反射来完成。
+### 1.2、容器概述
+这个接口`org.springframework.context.ApplicationContext`代表了Spring IoC容器，并且负责实例化、配置、装配beans。容器获得指令，什么样的对象是实例化、配置、装配通过读取配置元数据，配置元数据是xml、java注解或java代码，它让你表达组成你应用程序之间对象的依赖。
+
+Spring提供这个`ApplicationContext`接口的一些实现类，在一个单独的应用程序中，通常是创建一个 `ClassPathXmlApplicationContext` 或 `FileSystemXmlApplicationContext`的实例，在过去的一段时间里是使用xml方式配置元数据。你也能够通过java注解或java代码的方式配置元数据。

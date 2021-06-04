@@ -1,0 +1,20 @@
+---
+layout: post
+title:  "如何成为openjdk贡献者"
+category: java
+date:   2021-06-1 13:25:35 +0200
+
+---
+
+### 怎样贡献，可以直接参与源码的编写（通过提交补丁的方式）或者配合赞助商的形式参与。例如：对文档的完善等，也此来帮助使用jdk的开发者。[openjdk贡献者地址](http://openjdk.java.net/contribute/)
+
+### 成为贡献者
+> 申请OCA（ Oracle Contributor Agreement ），这样你就可以参与到oracle赞助的所有开源项目，成为贡献者。已经有OCA的不需要再次申请，或者SUN公司的SCA；或者工作在oracle公司、或者有商务往来签署对等的协议的公司。
+[OCA的申请地址](https://oca.opensource.oracle.com/)
+
+### 怎样工作
+> 通常都是对bug的修复
+[bug database](https://bugs.openjdk.java.net/secure/Dashboard.jspa)
+
+### bug的修复
+#### 通常工作在释放版本上，而非更新版本 [jdk project](http://openjdk.java.net/projects/jdk/)
