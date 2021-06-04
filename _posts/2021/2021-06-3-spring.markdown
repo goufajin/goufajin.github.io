@@ -37,3 +37,31 @@ Spring提供这个`ApplicationContext`接口的一些实现类，在一个单独
 以下将列举Spring IoC容器使用其他格式的元数据：
 * 基于注解的配置：Spring2.5支持基于注解的方式配置元数据
 * 基于java的配置：从Spring3.0，Spring JavaConfig项目提供许多特性，成为了Spring框架的核心。因此，你能够在应用程序的外部定义bean通过java的方式而不是xml的方式。为了使用这个新特性，看 [@Configuration](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html), [@Bean](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html), [@Import](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html), 和 [@DependsOn](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html) 注解。
+
+Spring容器管理地Spring 配置必须有一个或者超过一个的bean定义组成。基于xml的元数据配置bean，<bean>元素在<beans>里面，基于java配置，在@Configuration类里面使用@Bean注解方法。
+
+这些bean定义组成应用程序精确的对象，通常，你定义的服务层对象，数据访问层对象（DAOs），展现层对象如Struts Action实例，基础设施对象如Hibernate SessionFactories, JMS Queues等等。通常，在容器里面，没有细腻度的配置领域对象。因为它通常是DAOs和业务逻辑创建和加载领域对象（这就是DO、DTO、PO的由来吧）,然而，你也能使用Spring集成的AspectJ注入对象[](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#aop-atconfigurable)。
+如下展示了基于xml配置元数据的方式：
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="..." class="...">  1,2
+        <!-- collaborators and configuration for this bean go here -->
+    </bean>
+
+    <bean id="..." class="...">
+        <!-- collaborators and configuration for this bean go here -->
+    </bean>
+
+    <!-- more bean definitions go here -->
+
+</beans>
+```
+1、id属性是一个字符串，标识了单个的bean定义
+2、class属性定义bean的类型，使用全限定类名
+
+id的值也是可以引用到协作的bean，这个例子没有显示引用到协作的bean，更多地看依赖[](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#beans-dependencies)
