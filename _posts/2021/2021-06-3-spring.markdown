@@ -68,3 +68,52 @@ Spring容器管理地Spring 配置必须有一个或者超过一个的bean定义
 > 2、class属性定义bean的类型，使用全限定类名
 
 id的值也是可以引用到协作的bean，这个例子没有显示引用到协作的bean，更多地看依赖[Dependencies](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#beans-dependencies)
+
+#### 1.2.2.实例化容器
+`ApplicationContext`构造器参数接收一个或者多个字符串的路径参数，容器加载配置元数据来自多样化地外部资源，例如：本地文件系统、java CLASSPATH等等。
+```
+ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", "daos.xml");
+```
+> 在之后关于Spring IoC容器的学习，你可能想要了解关于Spring [Resource的抽象](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#resources)，它提供了一个便利的机制读取一个输入流来自locations定义的一个URI语法。特别地，Resource path通常构造应用上下文，作为描述在[Application Contexts and Resource Paths](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#resources-app-ctx)
+
+下面的例子显示服务层对象（services.xml）配置文件
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- services -->
+
+    <bean id="petStore" class="org.springframework.samples.jpetstore.services.PetStoreServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+        <property name="itemDao" ref="itemDao"/>
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <!-- more bean definitions for services go here -->
+
+</beans>
+```
+下面的例子显示数据访问层对象（daos.xml）
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="accountDao"
+        class="org.springframework.samples.jpetstore.dao.jpa.JpaAccountDao">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <bean id="itemDao" class="org.springframework.samples.jpetstore.dao.jpa.JpaItemDao">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <!-- more bean definitions for data access objects go here -->
+
+</beans>
+```
