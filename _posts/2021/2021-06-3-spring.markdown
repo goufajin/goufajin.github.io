@@ -40,7 +40,9 @@ Spring提供这个`ApplicationContext`接口的一些实现类，在一个单独
 
 Spring容器管理地Spring 配置必须有一个或者超过一个的bean定义组成。基于xml的元数据配置bean，<bean>元素在<beans>里面，基于java配置，在@Configuration类里面使用@Bean注解方法。
 
-这些bean定义组成应用程序精确的对象，通常，你定义的服务层对象，数据访问层对象（DAOs），展现层对象如Struts Action实例，基础设施对象如Hibernate SessionFactories, JMS Queues等等。通常，在容器里面，没有细腻度的配置领域对象。因为它通常是DAOs和业务逻辑创建和加载领域对象（这就是DO、DTO、PO的由来吧）,然而，你也能使用Spring集成的AspectJ注入对象[](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#aop-atconfigurable)。
+这些bean定义组成应用程序精确的对象，通常，你定义的服务层对象，数据访问层对象（DAOs），展现层对象如Struts Action实例，基础设施对象如Hibernate SessionFactories, JMS Queues等等。通常，在容器里面，没有细腻度的配置领域对象。因为它通常是DAOs和业务逻辑创建和加载领域对象（这就是DO、DTO、PO的由来吧）,然而，你也能使用Spring集成的AspectJ注入对象.[ Using AspectJ to dependency-inject domain objects with Spring.
+
+](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#aop-atconfigurable)。
 
 如下展示了基于xml配置元数据的方式：
 ```
@@ -62,7 +64,7 @@ Spring容器管理地Spring 配置必须有一个或者超过一个的bean定义
 
 </beans>
 ```
-1、id属性是一个字符串，标识了单个的bean定义
-2、class属性定义bean的类型，使用全限定类名
+> 1、id属性是一个字符串，标识了单个的bean定义
+> 2、class属性定义bean的类型，使用全限定类名
 
-id的值也是可以引用到协作的bean，这个例子没有显示引用到协作的bean，更多地看依赖[](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#beans-dependencies)
+id的值也是可以引用到协作的bean，这个例子没有显示引用到协作的bean，更多地看依赖[Dependencies](https://docs.spring.io/spring-framework/docs/5.2.4.RELEASE/spring-framework-reference/core.html#beans-dependencies)
