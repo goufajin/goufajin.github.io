@@ -117,3 +117,67 @@ ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", 
 
 </beans>
 ```
+以上的例子，通过ref表达了bean直接的依赖关系
+
+##### 组成基于XML配置元数据
+bean的定义可以跨域多个xml，这通常是有用。每一个单独的xml文件配置代表着一个逻辑层或者一个模块在你的应用中。
+
+你能够使用应用上下文构造器加载来自多个的XML文件的bean定义，构造器获得多Resource定位。二者则一的，使用一个或者多个<import/>元素加载bean定义来自其他文件，具体如下：
+```
+<beans>
+    <import resource="services.xml"/>
+    <import resource="resources/messageSource.xml"/>
+    <import resource="/resources/themeSource.xml"/>
+
+    <bean id="bean1" class="..."/>
+    <bean id="bean2" class="..."/>
+</beans>
+```
+之上的例子，额外的bean定义加载来自三个文件services.xml, messageSource.xml, 和 themeSource.xml。在<beans/>元素下的所有的bean都被导入，必须验证xml bean定义，根据Spring Schema。
+> 这是可能的，但是不推荐，引用文件在父类目录使用相对`../`路径，特别的，这个也是不推荐的`classpath:`URLs,例如：`classpath:../services.xml`,在运行的时候会选择最近的classpath根和查找在它的父目录，Classpath改变可能导致选择的目录错误。
+> 推荐你使用全限定资源定位替代相对路径，例如：`file:C:/config/services.xml` 或 `classpath:/config/services.xml`，然而，你能结合你的应用配置绝对路径，例如：`${…​}`，这种方式在运行时是被替换的。
+
+#### 1.2.3. 使用容器
+`ApplicationContext`是一个高级工厂接口，它维护不同bean的登记和它们的依赖关系。使用这个方法`T getBean(String name, Class<T> requiredType)`，你能够取回你的bean的一个实例。
+
+`ApplicationContext`这个接口让你读bean定义和访问它们，如下所示：
+```
+// create and configure beans
+ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", "daos.xml");
+
+// retrieve configured instance
+PetStoreService service = context.getBean("petStore", PetStoreService.class);
+
+// use configured instance
+List<String> userList = service.getUsernameList();
+```
+一个最灵活多变的接口`GenericApplicationContext`结合读代理，例如用`XmlBeanDefinitionReader`读取xml文件bean定义，如下所示：
+```
+GenericApplicationContext context = new GenericApplicationContext();
+new XmlBeanDefinitionReader(context).loadBeanDefinitions("services.xml", "daos.xml");
+context.refresh();
+```
+你能够混合相匹配诸如读代理在相同的`ApplicationContext`，读bean定义从不同的来源。
+
+你能够使用`getBean`方法取回你的实例，这个接口`ApplicationContext`也有一些其他的方法对于取回实例。但是，理想的做法，你的应用代码绝不应该直接使用它。确实，你的应用代码不应该根本地调用`getBean()`这个方法，且在Spring APIs根本没有依赖。例如：Spring集成web框架提供依赖注入对多web框架组件，诸如，作为控制器、JSF管理bean，让你声明依赖在指定的bean通过元数据（例如：自动注入注解@autowire）
+
+### 1.3. Bean 概述
+Spring IoC 容器管理一个或多个bean，用你提供的配置元数据创建bean（例如：元数据格式是XML <bean/>定义 ）
+
+在容器里面，这些bean定义是被描述作为`BeanDefinition` 对象。包含如下的信息：
+- 全限定类名，通常，bean的定义精确的实现类
++ bean行为配置元素，bean的状态是在容器中（scope,生命周期回调,等等）
+* bean的工作需要引用其他bean，引用也是被其他合作者或依赖者调用。
+- 其他地配置在新创建的对象，例如：池的大小或者连接数据在一个bean，管理一个连接池。
+元数据转换到一个properties制造每一个bean定义，下面的表显示这个 properties
+ 属性|翻译在|
+ --|:--:|
+ Class|实例化ben（后续加上）| 
+ Name|命名bean|
+ Scope|bean的域|
+ Constructor arguments|依赖注入|
+ Properties|依赖注入|
+ Autowiring mode|装配合作者|
+ Lazy initialization mode|懒实例化beans|
+ Initialization method|初始化回调|
+ Destruction method|销毁回调|   
