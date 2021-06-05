@@ -170,14 +170,14 @@ Spring IoC 容器管理一个或多个bean，用你提供的配置元数据创�
 * bean的工作需要引用其他bean，引用也是被其他合作者或依赖者调用。
 - 其他地配置在新创建的对象，例如：池的大小或者连接数据在一个bean，管理一个连接池。
 元数据转换到一个properties制造每一个bean定义，下面的表显示这个 properties
- 属性|翻译在|
- --|:--:|
- Class|实例化ben（后续加上）| 
- Name|命名bean|
- Scope|bean的域|
- Constructor arguments|依赖注入|
- Properties|依赖注入|
- Autowiring mode|装配合作者|
- Lazy initialization mode|懒实例化beans|
- Initialization method|初始化回调|
- Destruction method|销毁回调|   
+ |属性|翻译在|
+ |----|----|
+ |Class|实例化ben（后续加上）| 
+ |ame|命名bean|
+ |Scope|bean的域|
+ |onstructor arguments|依赖注入|
+ |roperties|依赖注入|
+ |utowiring mode|装配合作者|
+ |azy initialization mode|懒实例化beans|
+ |nitialization method|初始化回调|
+ |estruction method|销毁回调|   
