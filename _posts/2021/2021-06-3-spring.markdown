@@ -170,8 +170,9 @@ Spring IoC 容器管理一个或多个bean，用你提供的配置元数据创�
 * bean的工作需要引用其他bean，引用也是被其他合作者或依赖者调用。
 - 其他地配置在新创建的对象，例如：池的大小或者连接数据在一个bean，管理一个连接池。
 元数据转换到一个properties制造每一个bean定义，下面的表显示这个 properties
+
  | 属性 | 翻译在 |
- | ---- | ---- |
+ | - | - |
  | Class| 实例化ben（后续加上）| 
  | Name | 命名bean |
  | Scope | bean的域 |
@@ -181,3 +182,10 @@ Spring IoC 容器管理一个或多个bean，用你提供的配置元数据创�
  | Lazy initialization mode | 懒实例化beans |
  | Initialization method | 初始化回调 |
  | Destruction method | 销毁回调 |   
+
+ `ApplicationContext`接口也允许登记一个存在的对象在容器之外，通过访问应用上下文BeanFactory接口的getBeanFactory()方法完成。BeanFactory接口的一个实现类`DefaultListableBeanFactory`。`DefaultListableBeanFactory`支持两种登记bean地方式，如：registerSingleton(..)和registerBeanDefinition(..)方法，然而，典型的应用工作是单独地用bean定义通过规则地bean定义元数据。
+
+ > 注意！，bean的元数据和手工单列的登记应该尽可能早的完成，为了容器能正确地处理它们自动装配期间和其他内省的步骤。在一定程度上重写元数据和存在的单例也是支持的，在运行时登记新的bean是非官方支持的，可能会导致并发访问异常、不一致地bean状态，或者两者同时发生。
+ #### 1.3.1. 命名地 Beans
+ 每一个bean有一个或者多个标识符，这些标识符必须是独一无二地在容器里，一个bean通常仅仅有一个标识符，然而，如果超过一个，额外地能够考虑使用别名。
+
