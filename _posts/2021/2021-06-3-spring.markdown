@@ -186,6 +186,7 @@ Spring IoC 容器管理一个或多个bean，用你提供的配置元数据创�
  `ApplicationContext`接口也允许登记一个存在的对象在容器之外，通过访问应用上下文BeanFactory接口的getBeanFactory()方法完成。BeanFactory接口的一个实现类`DefaultListableBeanFactory`。`DefaultListableBeanFactory`支持两种登记bean地方式，如：registerSingleton(..)和registerBeanDefinition(..)方法，然而，典型的应用工作是单独地用bean定义通过规则地bean定义元数据。
 
  > 注意！，bean的元数据和手工单列的登记应该尽可能早的完成，为了容器能正确地处理它们自动装配期间和其他内省的步骤。在一定程度上重写元数据和存在的单例也是支持的，在运行时登记新的bean是非官方支持的，可能会导致并发访问异常、不一致地bean状态，或者两者同时发生。
+
  #### 1.3.1. 命名地 Beans
  每一个bean有一个或者多个标识符，这些标识符必须是独一无二地在容器里，一个bean通常仅仅有一个标识符，然而，如果超过一个，额外地能够考虑使用别名。
 
@@ -341,7 +342,7 @@ public class DefaultServiceLocator {
 DI有两种方式，基于构造器的依赖注入和基于setter依赖注入。
 
 ##### 基于构造器的依赖注入
-基于构造器的DI是成熟的，通过容器调用有一定数量参数的构造器，每一个参数代表一个依赖。和调用指定参数的静态工厂方法构造的bean是等价的，这个讨论对待的参数和构造器、静态工厂方法相似。下面的例子显示使用构造器依赖注入：
+基于构造器的DI是这样完成的，通过容器调用有一定数量参数的构造器，每一个参数代表一个依赖。和调用指定参数的静态工厂方法构造的bean是等价的，这个讨论对待的参数和构造器、静态工厂方法相似。下面的例子显示使用构造器依赖注入：
 ```
 public class SimpleMovieLister {
 
@@ -357,6 +358,7 @@ public class SimpleMovieLister {
 }
 ```
 > 注意，上面的这个例子类没有什么特别之处，就是一个POJO，不依赖容器特定的接口、基类或注解
+
 ##### 构造器参数注入依赖
 构造器参数注入通过匹配参数的类型注入，如果没有潜在不明确构造器参数存在bean定义。构造器参数的顺序是定义在bean的定义，当bean实例化的时候能匹配到具体参数顺序的构造器进行注入。考虑如下的类：
 ```
@@ -401,4 +403,66 @@ public class ExampleBean {
 }
 ```
 
-*构造器参数类型匹配*
+* 构造器参数类型匹配 *
+在上面的场景，如果你清晰地的指定构造器参数类型通过使用`type`属性，容器能够通过简单类型匹配使用的类型。如下显示：
+```
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg type="int" value="7500000"/>
+    <constructor-arg type="java.lang.String" value="42"/>
+</bean>
+```
+除了解决含糊不清的多个简单类型值外，指定一个索引解决含糊不清的两个相同类型的构造器参数类型。
+> 注意，索引是从0开始的。
+
+* 构造器参数命名 *
+你也能够使用构造器参数命名消除歧义，如下：
+```
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg name="years" value="7500000"/>
+    <constructor-arg name="ultimateAnswer" value="42"/>
+</bean>
+```
+请记住，为了使这个工作在盒子之外，你的代码必须编译在debug模式，以至于Spring能够查找构造器的参数名字。如果你不想编译你的代码用debug模式，你能够使用JDK的注解`@ConstructorProperties`清晰的指定构造器的参数。如下显示怎么样做：
+```
+package examples;
+
+public class ExampleBean {
+
+    // Fields omitted
+
+    @ConstructorProperties({"years", "ultimateAnswer"})
+    public ExampleBean(int years, String ultimateAnswer) {
+        this.years = years;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+}
+```
+##### 基于Setter的依赖注入
+基于Setter的DI注入是通过调用无参构造器或静态无参工厂方法实例化bean后调用bean的setter方法完成。
+
+下面的例子显示一个类是仅仅通过基于setter的注入，这是一个传统的POJO，他不依赖于容器特定的接口、基类、或注解来完成。
+```
+public class SimpleMovieLister {
+
+    // the SimpleMovieLister has a dependency on the MovieFinder
+    private MovieFinder movieFinder;
+
+    // a setter method so that the Spring container can inject a MovieFinder
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // business logic that actually uses the injected MovieFinder is omitted...
+}
+```
+`ApplicationContext`容器管理的bean是支持基于构造器和基于setter的依赖注入（DI），在一些依赖已经通过构造器的方式注入后，他也支持基于setter的DI。你也可以以`BeanDefinition`的形式配置依赖项。你能够结合`PropertyEditor`实例变换属性从一个格式到另外一个格式。然而，Spring的使用者是不直接使用这些类工作的（即：编程的方式）宁愿用xml的bean定义，注解组件（即：`@Component`, `@Controller`等等），或者在基于java的`@Configuration`类下的`@Bean`注解方法。这些资源在容器内部转换为`BeanDefinition`的一个实例，并用于加载整个Spring IoC容器实例。
+
+* 基于构造器或基于setter的DI？*
+> 自从你可以混合使用基于构造器或者基于setter的注入后，这是一个很好的实践经验，对于强制的依赖使用构造器，对于可选的依赖使用setter方法或者配置方法。注意使用这个注解`@Required `在setter方法上使得属性是必须的依赖的。然而，使用编程化的校验构造器参数的注入更可取。
+> Spring团队通常主张使用构造器的注入方式，因为它让你实现应用组件为不可变对象，并且保证必须的依赖是不为空的。此外，基于构造器的组件注入总是返回给客户端代码一个完整实例化的状态，值得注意的是，大量的构造器参数是坏代码的味道，意味着这个类可能有太多的职责，应该进行重构，以更好地解决关注事项的适当分离。
+> Setter注入应该主要用于可选的依赖项，这些依赖项可以在类中分配合理的默认值。否则，非空检查必须在代码使用依赖项的任何地方执行。setter注入的一个好处是，setter方法使该类的对象能够在以后重新配置或重新注入。通过JMX mbean进行管理是setter注入的一个引人注目的用例。
+> 使用对特定类最有意义的DI风格。有时，在处理你没有源码的第三方类时，这个选择是为你做出。例如：如果第三方类没有暴露任何的setter方法时，因而基于构造器的注入仅仅是可获得的形式。
+
+* 依赖解析流程 *
+容器执行bean的依赖解析如下：
+- 使用所有描述bean的配置元数据初始化并创建`ApplicationContext`实例，配置元数据能够通过xml、java代码、注解指定。
