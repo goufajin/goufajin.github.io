@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "centos7 网络配置"
+category: java
+date:   2021-06-1 13:25:35 +0200
+
+---
+## 配置静态ip地址
+
+## 进入到具体的网卡目录下，进行编辑
+ vi /etc/sysconfig/network-scripts/ifcfg-ens32  `ifcfg-ens32 `为网卡名称，具体得详细的看，ens开始的几个都要配上ip地址、子网掩码、网关；
+
+## 具体的配置如下：
+ ```
+bootproto=static
+
+onboot=yes
+
+#在最后加上几行，IP地址、子网掩码、网关、dns服务器
+IPADDR=192.168.1.160
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+DNS1=119.29.29.29
+DNS2=8.8.8.8
+
+ ```
+
+## 修改后重启一下网络服务即可 
+``` systemctl restart network ```
+
+## 输入`ip addr`就可以看到配置的ip地址了 
+
+## 怎样测试配置的网络是否通了没，ping 配置的网关，网关通了在看其他的问题，一般网关通就没有问题了。
