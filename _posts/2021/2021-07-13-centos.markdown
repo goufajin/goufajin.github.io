@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "centos7 网络配置"
-category: java
+category: other
 date:   2021-06-1 13:25:35 +0200
 
 ---
