@@ -9,29 +9,29 @@ Mac 配置内外网同时访问
 ## 1.首先打开Mac终端
 
 ## 2.查看路由表：netstat -nr
-[查看路由表](/assets/images/netstat.jpeg)
+[...](/assets/images/netstat.jpeg)
 ----
 192.168.235.254是我本机外网的默认路由（即网关）
 
 172.31.10.254是本机内网默认路由
 
 ## 3.查看默认路由：route get 0.0.0.0
-[查看默认路由](/assets/images/netstat2.jpeg)
+[...](/assets/images/netstat2.jpeg)
 
-因为我之前已经配置好了 所以查看默认路由走的是外网的网关（即路由）阿明白
+因为我之前已经配置好了 所以查看默认路由走的是外网的网关（即路由）
 
-## 4.好吧这一步我们先删掉默认路由吧。。命令是：
+## 4.这一步我们先删掉默认路由吧。。命令是：
 
 sudo route delete 0.0.0.0
 
 再删掉内网默认路由：sudo route delete 172.31.0.0
-[再删掉内网默认路由](/assets/images/netstat3.jpeg)
+[...](/assets/images/netstat3.jpeg)
 
 ## 5.再重新添加默认路由，走外网的网关：
 
 sudo route -n add -net 0.0.0.0 192.168.235.254（ps:千万不要照抄 记得写你们电脑上自己的IP。。）
 
-[再重新添加默认路由，走外网的网关](/assets/images/netstat4.jpeg)
+[...](/assets/images/netstat4.jpeg)
 
 ## 6.再加上内网的路由，到内网服务器地址，走内网网关：
 

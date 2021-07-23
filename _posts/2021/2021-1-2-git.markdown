@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "git 常用命令总结"
+category: git
+date:   2021-1-2 13:25:35 +0200
+
+---
+
+## git branch -a 查看所有的分支，当前分支是*标注的
+
+## git checkout -b newBranch 基于当前工作分支创建一个新的分支
+
+## git checkout BranchName 切换分支
+
