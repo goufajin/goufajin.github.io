@@ -82,6 +82,8 @@ navs:
         subLabel: Kafka
       - subHref: /zookeeper.html
         subLabel: ZooKeeper
+      - subHref: /redis.html
+        subLabel: Redis
   - href: /about.html
     label: About
 
