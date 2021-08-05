@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "kafka实战"
+title:  "kafka quickstart"
 category: kafka
 date:   2021-05-02 13:25:35 +0200
 ---
-kafka实战
+[kafka实战](https://kafka.apache.org/quickstart#quickstart_startserver)
 
 ## 1、Broker Configs
 

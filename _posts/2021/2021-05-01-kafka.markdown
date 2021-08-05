@@ -11,6 +11,7 @@ Kafka能够收集数据库数据、物联网数据、移动设备、云服务、
 
 [kafka官方文档](https://kafka.apache.org/documentation/)
 [快速开始](https://kafka.apache.org/quickstart#quickstart_send)
+[财富100强60%的公司使用Kafka，他们的使用场景](https://kafka.apache.org/powered-by)
 ## 5个核心API对java和scala
 + The [Admin API](https://kafka.apache.org/documentation.html#adminapi) to manage and inspect topics, brokers, and other Kafka objects.
 + The [Producer API](https://kafka.apache.org/documentation.html#producerapi) to publish (write) a stream of events to one or more Kafka topics.
