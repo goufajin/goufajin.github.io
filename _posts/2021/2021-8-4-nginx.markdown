@@ -1,0 +1,87 @@
+---
+layout: post
+title:  "nginx使用教程"
+category: nginx
+date:   2021-8-3 13:25:35 +0200
+
+---
+这个教程描述怎么启停nginx、重新加载配置、解释nginx结构体文件怎么设置服务于静态文件，怎样配置nginx作为了一个代理服务器、用FastCGI应用怎样连接它。
+
+nginx有一个master进程和几个worker进程，master进程是读取和评估配置，并且维护worker进程。worker进程实际处理请求。nginx采用基于事件的模型和依赖于操作系统的机制来有效地在worker进程之间分发请求。worker进程的数量在配置文件中定义，可以根据给定的配置进行固定，也可以根据可用CPU核的数量自动调整。（看[worker进程](http://nginx.org/en/docs/ngx_core_module.html#worker_processes)）
+
+nginx及其模块的工作方式由配置文件决定。默认地，配置文件叫` nginx.conf `，在这些目录下/usr/local/nginx/conf, /etc/nginx, 或者 /usr/local/etc/nginx。
+
+## 启动、停止、和重启配置
+要启动nginx，运行可执行文件。一旦nginx启动，就可以通过使用-s参数调用可执行文件来控制它。使用以下语法:
+```
+nginx -s signal
+```
+这里的信号可以是下面的其中一个：
+- stop：快速停止
++ quit：优雅地退出
+- reload：重启配置文件
++ reopen：重新开始日志文件
+
+例如：为了停止nginx进程，并等待worker进程完成当前请求的服务，可以执行以下命令:
+``` 
+nginx -s quit
+```
+`注意`：上面的这个命令要和启动的用户是同一个用户才行
+在配置文件中所做的更改将不会被应用，直到重新加载配置命令被发送到nginx或它被重新启动。要重新加载配置，请执行:
+```
+nginx -s reload
+```
+ 一旦主进程收到重新加载配置的信号，它将检查新配置文件的语法有效性，并尝试应用其中提供的配置。如果成功，主进程启动新的工作进程，并向旧的工作进程发送消息，请求它们关闭。否则，主进程将回滚更改并继续使用旧配置。旧的worker进程接收到一个关闭命令，停止接受新连接，并继续服务当前请求，直到所有此类请求都得到服务。之后，旧的worker进程退出。
+
+```
+kill -s QUIT 1628 #1628为nginx的主进程号，通常在 /usr/local/nginx/logs 或 /var/run 目录下的 nginx.pid文件中。
+```
+获得所有运行的nginx列表：
+```
+ps -ax | grep nginx
+```
+## nginx配置文件结构
+Nginx由配置文件中指定的指令控制的模块组成。指令分为简单指令和块指令。一个简单的指令由名称和参数组成，以空格分隔，以分号(;)结尾。block指令与simple指令具有相同的结构，但它以一组由大括号({和})包围的附加指令结束，而不是分号。如果块指令可以在花括号中包含其他指令，它就被称为上下文(例如:events、http、server和location)。
+
+## nginx服务静态内容
+一个web服务最重要的任务是分发文件（例如：图片和静态的HTML页面），文件将从不同的本地目录提供: /data/www (可能包含HTML文件) 和 /data/images (包含图片文件)。
+首先创建`/data/www`目录，放一个index.html文件；创建`/data/images `目录，并且放一些照片在里面。
+注释掉配置文件默认的配置，使用新的一个块
+```
+server {
+    location / {
+        root /data/www;
+    }
+
+    location /images/ { 
+        root /data;
+    }
+}
+
+```
+ 这已经是服务器的工作配置，该服务器侦听标准端口80，可以在本地机器http://localhost/上访问。为了响应uri以/images/开头的请求，服务器将从/data/images目录发送文件。例如，为了响应http://localhost/images/example.png请求，nginx将发送/data/images/example.png文件。如果这样的文件不存在，nginx将发送一个响应指示404错误。uri不是以/images/开头的请求将被映射到/data/www目录。例如，为了响应http://localhost/some/example.html请求，nginx将发送/data/www/some/example.html文件。
+
+发送重启信号，是上面的配置生效`nginx -s reload`
+
+如果有些东西没有像预期的那样工作，你可以尝试在/usr/local/nginx/logs或/var/log/nginx目录下的access.log和error.log文件中找出原因
+
+## 设置做为代理服务器
+nginx最常见的用法之一是将其设置为代理服务器，这意味着服务器接收请求，将请求传递给代理服务器，从它们获取响应，并将它们发送给客户端。
+
+我们将配置一个基本的代理服务器，它将使用本地目录中的文件来服务对images的请求，并将所有其他请求发送到一个代理服务器。在这个例子中，两个服务器都定义在一个nginx实例上。
+
+首先，定义代理服务器，在nginx的配置文件中添加一个server块，内容如下:
+```
+server {
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+
+    location ~ \.(gif|jpg|png)$ {
+        root /data/images;
+    }
+}
+```
+ 因为使用的是标准端口80)，并将所有请求映射到本地文件系统的/data/up1目录。创建这个目录并将index.html文件放入其中。注意，根指令放在服务器上下文中。当为请求选择的位置块不包含自己的根指令时，会使用这样的根指令。
+
+修改完成，重启nginx
