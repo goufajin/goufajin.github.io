@@ -5,7 +5,7 @@ category: nginx
 date:   2021-8-3 13:25:35 +0200
 
 ---
-这个教程描述怎么启停nginx、重新加载配置、解释nginx结构体文件怎么设置服务于静态文件，怎样配置nginx作为了一个代理服务器、用FastCGI应用怎样连接它。
+这个教程描述怎么启停nginx、重新加载配置、解释nginx结构体文件怎么设置服务于静态文件，怎样配置nginx作为了一个代理服务器。
 
 nginx有一个master进程和几个worker进程，master进程是读取和评估配置，并且维护worker进程。worker进程实际处理请求。nginx采用基于事件的模型和依赖于操作系统的机制来有效地在worker进程之间分发请求。worker进程的数量在配置文件中定义，可以根据给定的配置进行固定，也可以根据可用CPU核的数量自动调整。（看[worker进程](http://nginx.org/en/docs/ngx_core_module.html#worker_processes)）
 
