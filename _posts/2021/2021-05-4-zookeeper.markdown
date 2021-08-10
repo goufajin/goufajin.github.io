@@ -15,6 +15,7 @@ Zookeeper是一个分布式，开源的协调分布式应用。它公开了一�
 ZooKeeper的实现注重高性能，高可用，严格的顺序访问。ZooKeeper的性能方面意味着它可以用于大型、分布式系统。 可靠性方面使它不会成为单点故障。严格的顺序意味着复杂的同步原语可以在客户端实现。
 
 `Zookeeper是复制的`。 就像它所协调的分布式过程一样，ZooKeeper本身打算在一组称为集合的主机上进行复制。
+
 [···](/assets/images/zkservice.jpg)
 
 组成ZooKeeper服务的服务器必须相互了解。 它们在内存中维护状态镜像，并在持久存储中维护事务日志和快照。只要大多数服务器可用，ZooKeeper服务就可用。
@@ -29,6 +30,7 @@ ZooKeeper的实现注重高性能，高可用，严格的顺序访问。ZooKeepe
 ZooKeeper提供的名称空间与标准文件系统的名称空间非常相似。名称是由斜杠(/)分隔的路径元素序列。ZooKeeper命名空间中的每个节点都由路径标识。
 
 Zookeeper的分层命名空间
+
 [···](/assets/images/zknamespace.jpeg)
 
 ## 节点和临时节点
