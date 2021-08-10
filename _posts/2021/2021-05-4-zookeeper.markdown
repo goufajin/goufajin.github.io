@@ -1,10 +1,43 @@
 ---
 layout: post
-title:  "zookeeper 官方文档解读"
+title:  "zookeeper 概述-1"
 category: zookeeper
 date:   2019-05-13 23:55:35 +0200
 ---
+[官网](https://zookeeper.apache.org/doc/current/zookeeperOver.html)
+## Zookeeper：协调分布式应用
+Zookeeper是一个分布式，开源的协调分布式应用。它公开了一组简单的原语，分布式应用程序可以在此基础上实现更高级别的同步服务，配置维护，组和命名。它被设计为容易编程的，并使用了一种类似于文件系统目录树结构的数据模型。它在Java中运行，并且有针对Java和C的绑定。
 
-zookeeper管理 for synchronization, configuration maintenance, and groups and naming，zookeeper数据是存储在内存中，因而有好的性能（吞吐量）和低延迟。
+众所周知，协调服务很难做好。它们特别容易出现竞争条件和死锁等错误。ZooKeeper背后的动机是减轻分布式应用从头开始实现协调服务的责任。
+## 设计目标
+`Zookeeper是简单的。`ZooKeeper允许分布式进程通过一个类似于标准文件系统的共享层次命名空间相互协调。命名空间由数据寄存器组成，称为znodes，用ZooKeeper的说法 - 这些类似于文件和目录。与典型的文件系统不同，它是为存储而设计的，数据存储在内存中，这意味Zookeeper可以实现高吞吐量和低延迟。
 
-[官方文档](https://zookeeper.apache.org/doc/current/zookeeperOver.html)
+ZooKeeper的实现注重高性能，高可用，严格的顺序访问。ZooKeeper的性能方面意味着它可以用于大型、分布式系统。 可靠性方面使它不会成为单点故障。严格的顺序意味着复杂的同步原语可以在客户端实现。
+
+`Zookeeper是复制的`。 就像它所协调的分布式过程一样，ZooKeeper本身打算在一组称为集合的主机上进行复制。
+[···](/assets/images/zkservice.jpg)
+
+组成ZooKeeper服务的服务器必须相互了解。 它们在内存中维护状态镜像，并在持久存储中维护事务日志和快照。只要大多数服务器可用，ZooKeeper服务就可用。
+
+客户端连接到单个ZooKeeper服务器。 客户端维护一个TCP连接，通过它发送请求、获取响应、获取监视事件和发送心跳。如果与服务器的TCP连接中断，客户端将连接到另一个服务器。
+
+`Zookeeper是顺序的`。 ZooKeeper用一个数字标记每个更新，这个数字反映了所有ZooKeeper事务的顺序。 后续操作可以使用该顺序实现更高级别的抽象，例如同步原语。
+
+`Zookeeper是快速的`。它在“读主导”的工作负载中速度特别快。 ZooKeeper应用程序运行在数千台机器上，在读比写更常见的地方，它的性能最好，比率约为10:1。
+
+## 数据模型和分层命名空间
+ZooKeeper提供的名称空间与标准文件系统的名称空间非常相似。名称是由斜杠(/)分隔的路径元素序列。ZooKeeper命名空间中的每个节点都由路径标识。
+
+Zookeeper的分层命名空间
+[···](/assets/images/zknamespace.jpeg)
+
+## 节点和临时节点
+与标准文件系统不同，ZooKeeper名称空间中的每个节点都可以拥有与其关联的数据以及子节点。这就像文件系统允许文件同时也是目录一样。 (ZooKeeper被设计用来存储协调数据:状态信息、配置信息、位置信息等，所以存储在每个节点上的数据通常很小，在字节到千字节的范围内。) 我们使用术语znode来明确我们谈论的是ZooKeeper数据节点。
+
+Znodes维护一个统计结构，其中包括数据更改的版本号、ACL更改和时间戳，以允许缓存验证和协调更新。每次znode的数据更改时，版本号都会增加。例如，每当客户机检索数据时，它也会接收到数据的版本。
+
+存储在名称空间中每个znode上的数据是自动读写的。读操作获取与znode关联的所有数据字节，写操作替换所有数据。每个节点都有一个访问控制列表(Access Control List, ACL)来限制谁可以做什么。
+
+ZooKeeper也有临时节点的概念。只要创建znode的会话是活动的，这些znode就会存在。当会话结束时，删除znode。
+
+## 条件更新和观察
