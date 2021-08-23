@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "oracle基础语法"
-category: java
+category: other
 date:   2020-01-01 13:25:35 +0200
 ---
 oracle基础语法
