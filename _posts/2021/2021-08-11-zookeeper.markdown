@@ -182,6 +182,7 @@ server.3=zoo3:2888:3888
 
  如果您的ZooKeeper机器中有多个网络接口，您还可以指示ZooKeeper绑定所有的接口，并在网络故障时自动切换到健康的接口。具体请参见[配置参数](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#id_multi_address)。
 
- ## 其他优化
+
+## 其他优化
 还有一些其他的配置参数可以大大提高性能:
 - 为了降低更新延迟，有一个专用的事务日志目录是很重要的。默认情况下，事务日志与数据快照和myid文件放在同一个目录中。dataLogDir参数表示用于事务日志的不同目录。
