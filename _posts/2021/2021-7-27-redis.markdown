@@ -80,11 +80,13 @@ appendonly yes
  ### 如果我的AOF被截断了怎么办?
 有可能是服务器在写入AOF文件时崩溃了，或者在写入AOF文件时存储的卷已经满了。当这种情况发生时，AOF仍然包含表示给定时间点版本的数据集的一致数据(使用默认的AOF fsync策略，该数据集可能在一秒内是旧的)，但是AOF中的最后一个命令可能被截断。 Redis的最新主要版本无论如何都可以加载AOF，只是丢弃文件中最后一个格式不正确的命令。在这种情况下，服务器将发出如下日志:
 ```
+
 * Reading RDB preamble from AOF file...
 * Reading the remaining AOF tail...
 # !!! Warning: short read while loading the AOF file !!!
 # !!! Truncating the AOF at offset 439 !!!
 # AOF loaded anyway because aof-load-truncated is enabled
+
 ```
  在这种情况下，如果你愿意，你可以改变默认配置来强制Redis停止，但默认配置是继续执行，不管文件中的最后一个命令是否格式良好，以确保重启后的可用性。
 #### 旧版本的Redis可能无法恢复，可能需要以下步骤:
