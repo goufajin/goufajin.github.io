@@ -1,8 +1,8 @@
 ---
 layout: page
-title: kafka 官网文档解读、最佳实战
+title: python最佳实战
 css: ['blog-page.css']
-permalink: /kafka
-menu: kafka
+permalink: /python
+menu: python
 ---
-{% include kafka.html %}
+{% include python.html %}

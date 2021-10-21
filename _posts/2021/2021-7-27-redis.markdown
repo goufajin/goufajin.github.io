@@ -99,6 +99,7 @@ appendonly yes
 ```
 * Reading the remaining AOF tail...
 # Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof --fix <filename>
+
 ```
 最好的方法是运行redis-check-aof实用程序，最初不带——fix选项，然后了解问题，跳转到文件中给定的偏移量，看看是否有可能手动修复文件:AOF使用与Redis协议相同的格式，手动修复非常简单。否则，可以让工具为我们修复文件，但在这种情况下，从无效部分到文件末尾的所有AOF部分都可能被丢弃，如果损坏发生在文件的初始部分，则会导致大量数据丢失。
 #### 它是如何工作的
