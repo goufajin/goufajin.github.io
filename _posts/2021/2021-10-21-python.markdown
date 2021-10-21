@@ -1,9 +1,34 @@
 ---
 layout: post
-title:  "redis集群"
-category: redis
-date:   2021-9-20 13:25:35 +0200
+title:  "python源码安装及相关组件安装"
+category: python
+date:   2021-10-21 13:25:35 +0200
 
 ---
-redis集群，redis不能实现强一致性，不管是先写磁盘还是直接回复客户端方式。
+官网下载对应的源码包。注意：`安装python的时候，解压的源码包先不要删除`
+
+## 编译python源码
+> ./configure --enable-optimizations --prefix=/usr/local/python2.7/  #prefix参数用于指定你要安装的目录，这个方式在root用户不能使用的时候很方便
+## 编译和安装
+> make && make install
+
+## 在python bin目录下创建软连接
+ln -s python2.7 python2.7.18 #在本机已经有python2.7的情况下，创建软链很用
+## 环境变量配置
+- vi ~/.bash_profile   #在PATH后把python bin加入进去
++ source ~/.bash_profile  #是环境变量生效
+
+-------------
+# 组件安装
+## zlib模块安装
+- [官网下载](http://www.zlib.net/)
++ 解压 tar xzvf zlib-1.2.8.tar.gz 
+- cd zlib-1.2.8 
+- ./configure 
+- make && make install
+## zlib安装完成后需要重新编译python，`安装python的时候，解压的源码包先不要删除，这一步需要用到` 进入Python源码文件目录，重新编译Python 
+- ./configure –prefix=/home/program/python3 –with-zlib=/usr/include  # prefix指定你最开始安装python的路径 -with-zlib这个指定你安装python目录下的include路径
+- ./configure –prefix=/home/program/python3 –with-zlib-dir=/usr/local/lib #和第一步同理
+## 组件安装原则
+> 路径发生改变后都需要重新编译源码安装
 
