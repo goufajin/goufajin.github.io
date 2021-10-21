@@ -71,19 +71,25 @@ navs:
         subLabel: SpringBoot
       - subHref: /springcloud.html
         subLabel: SpringCloud
-  
+  - href: /
+    label: 中间件
+    target: _self
+    subnav:
+      - subHref: /redis.html
+        subLabel: Redis
+      - subHref: /zookeeper.html
+        subLabel: ZooKeeper
+      - subHref: /kafka.html
+        subLabel: Kafka
+
   - href: /bigdata.html
     label: 大数据
     target: _self
     subnav:
       - subHref: /hadoop.html
         subLabel: Hadoop
-      - subHref: /kafka.html
-        subLabel: Kafka
-      - subHref: /zookeeper.html
-        subLabel: ZooKeeper
-      - subHref: /redis.html
-        subLabel: Redis
+      - subHref: /python.html
+        subLabel: Python
   - href: /about.html
     label: About
 
@@ -93,7 +99,7 @@ side_bar_repo_limit: 5 # Number of repos to show
 
 # Google Analytics
 analytics:
-  provider: google
+  provider: google baidu sogou
   google:
     tracking_id: 'tracking_id'  # ex. UA-72165600-X
 

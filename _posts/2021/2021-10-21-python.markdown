@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "redis集群"
+category: redis
+date:   2021-9-20 13:25:35 +0200
+
+---
+redis集群，redis不能实现强一致性，不管是先写磁盘还是直接回复客户端方式。
+

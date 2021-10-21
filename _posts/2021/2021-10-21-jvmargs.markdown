@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "jvm调优"
+category: jvm
+date:   2021-10-15 13:25:35 +0200
+
+---
+jvm相关参数
+地址：https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+
+```
+------  jdk7 -------------------
+-d64 只有HotSpot Server VM支持64位的并且 -server表明是使用-d64 -client模式是忽略的，32位环境也是忽略。
+-XX:+ DisableExplicitGC	禁用系统调用system.gc
+-XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction 避免堆中分配大对象
+-XX:NewSize 设置年轻代的大小
+-XX:ParallelGCThreads=n  设置并行收集器中GC线程的数量。
+-XX:+PrintGCDetails  打印垃圾收集输出和时间戳。
+-XX:SoftRefLRUPolicyMSPerMB=0 对软引用进行积极的处理
+-XX:+UnlockCommercialFeatures 启用商业特性（付费的jdk）
+-XX:+|-UseCompressedOops 在64位Java vm中启用压缩引用。该选项默认为true。
+-XX:+UseConcMarkSweepGC or -XX:+UseG1GC 标记清除或G1垃圾回收
+-XX:+UseParallelOldGC 启用并行垃圾收集器，它针对吞吐量和平均响应时间进行了优化。
+-XX:MaxGCPauseMillis=n 设置GC暂停目标时间，默认情况下没有设置最大值。
+-XX:+AggressiveOpts 积极的进行优化
+-Xssn 设置线程堆栈大小。
+-XX:+PrintGCTimeStamps 查看GC发生的频次，在前面打印日期
+-XX:PredictedClassLoadCount=n 该选项要求首先设置UnlockExperimentalVMOptions标志。如果你的应用程序加载了很多类，特别是如果class.forName()被大量使用，请使用PredictedClassLoadCount标志。推荐的值是加载的类的数量，如-verbose:class的输出所示。
+实例：java -XX:+UnlockExperimentalVMOptions -XX:PredictedClassLoadCount=60013
+
+降低响应时间调优
+ java -d64 -XX:+UseG1GC -Xms26g Xmx26g -XX:MaxGCPauseMillis=500 -XX:+PrintGCTimeStamps 
+高吞吐量调优
+java -d64 -server -XX:+AggressiveOpts -XX:+UseLargePages -Xmn10g  -Xms26g -Xmx26g 
+
+linux AMD64默认是启动在服务端
+https://docs.oracle.com/javase/7/docs/technotes/guides/vm/server-class.html
+
+G1收集器的特点，标记-整理算法，减少内存碎片化，可预测垃圾回收的停顿时间（建立可预测的停顿时间模型）；
+CMS收集器的特点 标记-清除算法，容易产生内存碎片，以最小的停顿时间为目标的收集器。
+
+--------- JDK8 -------------------
+ https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html
+ https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/index.html
+
+java -XX:+PrintCommandLineFlags -version 打印jvm的参数
+
+-XX:G1ConcRefinementThreads=5
+-XX:ParallelGCThreads=n
+-XX:G1HeapRegionSize=n
+-XX:GCTimeRatio=<nnn> 吞吐量
+ -verbose:gc 命令行参数，打印每一次堆和GC的收集信息
+G1 InitiatingHeapOccupancyPercent默认是45，并发标记开始
+-XX:GCTimeRatio=<nnn> 垃圾收集时间比上应用时间+1 》 1/(1 + <nnn>)
+
+NewSize MaxNewSize 新生代的大小设置。设置相同的值
+
+-XX:+UseParallelGC 吞吐量收集器 类似串行收集器。区别在于可以使用多线程进行并发收集。
+
+RMI远程过程调用也会产生收集不及时，只调用其他jvm api 
+java -Dsun.rmi.dgc.client.gcInterval=3600000
+    -Dsun.rmi.dgc.server.gcInterval=3600000 
+```
