@@ -1,0 +1,103 @@
+---
+layout: post
+title:  "python脚本远程执行linux命令"
+category: python
+date:   2021-10-28 13:25:35 +0200
+
+---
+一组命令可以在多台主机上执行
+
+## 安装python环境和相应的模块
+```
+把脚本拷贝到对应服务器上，需要有python环境，有环境没有对应模块的参照下面安装教程，
+1、安装paramiko-1.7.5
+进入到根目录，执行：python setup.py install
+2、安装pycrypto-2.6.1
+进入到根目录，执行：python setup.py build && python setup.py install
+
+3、进入脚本设置要批量执行的ip地址和命令
+
+4、执行 python remoteExecComon.py，查看输出结果确定是否成功
+```
+
+## 脚本exec_remoteCommand.py(批量创建用户为例)
+
+```
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-i
+
+import sys
+import paramiko
+import threading
+
+def getConnection(ip,username,password,commands,port = 22):
+ ssh = paramiko.SSHClient()
+ policy = paramiko.AutoAddPolicy()
+ ssh.set_missing_host_key_policy(policy)
+ ssh.connect(
+     hostname = ip,  
+     port = port, 
+     username = username,
+     password = password 
+ )
+
+ print("+++++++++++++++++++++++start++++++++++++++++++++")
+ print("[connect success] | ip : %s" % ip)
+
+ for command in commands:
+     stdin, stdout, stderr = ssh.exec_command(command)
+     result = stdout.read().decode()
+     #error =  stderr.read().decode() if not stderr is None else ''
+     print("result: \n %s"%result)
+     #if error != " ":
+     #    print("error: \n %s"%error)
+
+ print("+++++++++++++++++++++++done++++++++++++++++++++")
+
+ ssh.close()
+
+def main(host_list,commands):
+ for ip,username,password in host_list:
+     getConnection(ip,username,password,commands)
+
+
+if __name__ == "__main__":
+ host_list = [
+    ("10.170.59.101","root","123@123"),
+    ("10.170.59.102","root","123@123"),     
+  
+ ]
+ commands = [
+"useradd --uid 514 --gid 500 --shell /bin/bash --create-home search",
+"useradd --uid 507 --gid 500 --shell /bin/bash --create-home mq",
+"useradd --uid 506 --gid 500 --shell /bin/bash --create-home redis",
+"useradd --uid 501 --gid 500 --shell /bin/bash --create-home web",
+"useradd --uid 508 --gid 500 --shell /bin/bash --create-home gw",
+"useradd --uid 509 --gid 500 --shell /bin/bash --create-home upload",
+"useradd --uid 503 --gid 500 --shell /bin/bash --create-home cache",
+"useradd --uid 521 --gid 500 --shell /bin/bash --create-home nginx",
+"useradd --uid 519 --gid 500 --shell /bin/bash --create-home zk",
+"useradd --uid 512 --gid 500 --shell /bin/bash --create-home proxy",
+"useradd --uid 511 --gid 500 --shell /bin/bash --create-home deploy",
+"echo 'Test@123' | passwd --stdin search",
+"echo 'Test@123' | passwd --stdin mq",
+"echo 'Test@123' | passwd --stdin redis",
+"echo 'Test@123' | passwd --stdin web",
+"echo 'Test@123' | passwd --stdin gw",
+"echo 'Test@123' | passwd --stdin upload",
+"echo 'Test@123' | passwd --stdin cache",
+"echo 'Test@123' | passwd --stdin nginx",
+"echo 'Test@123' | passwd --stdin zk",
+"echo 'Test@123' | passwd --stdin proxy",
+"echo 'Test@123' | passwd --stdin deploy",
+ ]
+ main(host_list,commands)
+
+```
+> `创建linux用户需要注意的是`： 用户uid需要规划好；组gid需要规划好；家目录需要规划好；总体就这三个方面，另外使用useradd创建linux用户没有设置密码选项，所以需要在用`echo 'Test@123' | passwd --stdin mq`命令刷一下密码，有有特殊字符的密码需要使用单引号注释，否则执行会报错！
+> 使用命令`cat /etc/passwd`查看linux下创建的用户；使用命令`cat /etc/group`查看linux下的组
+> 创建用户需要root权限
+> 相同的组意味着有相同的权限，这和应用的角色可以看成是一个概念。
+
+## 执行以上脚本
+> python exec_remoteCommand.py

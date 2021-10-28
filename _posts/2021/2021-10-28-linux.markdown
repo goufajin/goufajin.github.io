@@ -1,0 +1,89 @@
+---
+layout: post
+title:  "linux常用命令总结"
+category: linux
+date:   2021-10-28 13:25:35 +0200
+
+---
+常用命令总结
+
+## 指定的目录下查找对应文件进行替换操作
+> find . -name "test.conf" | xargs sed -i "" "s/原内容/新内容/g"  #mac 需要在-i后面加"",linux则不需要
+> find test  -name 'test*.txt' | xargs sed -i  "s/test/127.0.0.1/g"
+## 批量修改ip地址
+> sed -i 's/10.170.26.143/10.174.43.27/g' `grep -rl "10.174" --exclude-dir=".svn" etc`
+## 查看linux版本
+> cat /proc/version 
+## 显示cpu相关信息
+lscup 
+## tar命令使用
+### .tar包打包和解压
+> 打包：tar cvf FileName.tar DirName
+> 解包：tar xvf FileName.tar
+
+### .tar.gz包打包和解压(开启压缩，具体可以tar --help查看)
+> 打包：tar zcvf FileName.tar.gz DirName
+> 解包：tar zxvf FileName.tar.gz
+
+## scp上传下载使用
+> 上传：scp redis202110121653.tar redis@10.174.114.94:/home/redis
+> 下载：scp redis@10.170.32.10:/home/redis/ .
+
+## 查看端口的进程号
+> netstat -apn  | grep 端口号
+
+## redis查看主备
+info replication
+
+## 查看linux下的组
+> cat /etc/group
+## 查看linux下的用户
+> cat /etc/passwd
+
+## 查看每一个层级路径的所有许可
+namei -om /path/to/check
+
+## nginx相关
+```
+nginx两种方式关停：
+1、kill -QUIT $( cat /usr/local/nginx/logs/nginx.pid ) 优雅停机
+2、 /usr/bin/nginx -s stop 
+
+使用新的配置启动nginx的worker
+kill -HUP $( cat /usr/local/openresty/nginx/logs/nginx.pid )
+
+```
+
+## lftp安装和使用
+```
+--------- lftp使用 ---------
+1、brew安装lftp
+brew install lftp
+1.2、如果报错提示readline找不到可以先安装readline
+brew install readline
+
+2、登录lftp
+lftp -u deploy 10.104.11.41 -p 21
+
+3、下载服务文件包
+get 文件包
+
+4、上传服务器包
+put 服务器包
+
+```
+
+## 进入foot宿主机器，执行如下命令把容器的文件下载到宿主机器
+> docker cp 容器ID:/容器路径  宿主机器路径
+
+
+
+
+## 查询进程号进行kill
+```
+#! /bin/bash
+PORT = 15001
+PID = cat `~/xx/logs/$PORT.pid`
+Kill $PID && echo “stop redis successful port $PORT pid $PID”
+
+```
