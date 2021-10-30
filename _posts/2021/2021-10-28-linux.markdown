@@ -9,13 +9,19 @@ date:   2021-10-28 13:25:35 +0200
 
 ## 指定的目录下查找对应文件进行替换操作
 > find . -name "test.conf" | xargs sed -i "" "s/原内容/新内容/g"  #mac 需要在-i后面加"",linux则不需要
+
 > find test  -name 'test*.txt' | xargs sed -i  "s/test/127.0.0.1/g"
+
 ## 批量修改ip地址
 > sed -i 's/10.170.26.143/10.174.43.27/g' `grep -rl "10.174" --exclude-dir=".svn" etc`
+
 ## 查看linux版本
-> cat /proc/version 
-## 显示cpu相关信息
+> cat /proc/version
+
+
+## 显示cpu相关信息  
 lscup 
+
 ## tar命令使用
 ### .tar包打包和解压
 > 打包：tar cvf FileName.tar DirName
@@ -30,13 +36,14 @@ lscup
 > 下载：scp redis@10.170.32.10:/home/redis/ .
 
 ## 查看端口的进程号
-> netstat -apn  | grep 端口号
+> netstat -apn | grep 端口号
 
 ## redis查看主备
 info replication
 
 ## 查看linux下的组
 > cat /etc/group
+
 ## 查看linux下的用户
 > cat /etc/passwd
 
@@ -44,6 +51,7 @@ info replication
 namei -om /path/to/check
 
 ## nginx相关
+
 ```
 nginx两种方式关停：
 1、kill -QUIT $( cat /usr/local/nginx/logs/nginx.pid ) 优雅停机
@@ -75,7 +83,6 @@ put 服务器包
 
 ## 进入foot宿主机器，执行如下命令把容器的文件下载到宿主机器
 > docker cp 容器ID:/容器路径  宿主机器路径
-
 
 
 
