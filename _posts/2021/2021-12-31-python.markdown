@@ -1,0 +1,20 @@
+---
+layout: post
+title:  "python开发环境搭建"
+category: python
+date:   2021-12-31 13:25:35 +0200
+
+---
+使用Vscode搭建python开发环境，安装python插件，重启vscode即可
+
+## 安装对应的python版本
+
+在平台上下载对应的python平台版本安装
+
+## 安装项目依赖的第三方库
+- 首先在工程目录下执行：`python3 setup.py install` 
++ 安装第三方依赖库，python3 -m pip install  python_consul-1.1.0-py2.py3-none-any.whl
+python3自带pip，可以免安装
+
+## 调试程序
+在菜单栏选择 Run》start Debugging 即可调试程序。
