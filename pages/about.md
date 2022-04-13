@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 道可顿悟,功需渐修
+title: 大道至简 又隐于无形
 css: ['blog-page.css']
 permalink: /about
 menu: about
