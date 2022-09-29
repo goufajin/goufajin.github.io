@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "求解5000阶乘之和"
+category: spring
+date:   2022-09-229 23:55:35 +0200
+---
+
+**普通版本**
+
+```
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
+public class Teest {
+	public static void main(String[] args) {
+		long start = (new Date()).getTime();
+		BigDecimal res = BigDecimal.ONE;
+		for (int i = 2; i <= 5000; i++) {
+			res = multiply(res,BigDecimal.valueOf(i));
+		}
+		int sum=0;
+		String str = res.toPlainString().replace("0","");
+
+		for (int i = 0; i < str.length(); i++) {
+			sum += Character.getNumericValue(str.charAt(i));
+		}
+		long end = (new Date()).getTime();
+		System.out.println("花费的时间："+(end-start) +"ms");
+		
+		System.out.println("5000阶乘结果之和为："+sum);
+
+	}
+
+	public static HashMap<Integer,BigDecimal> compute(int n){
+
+		return null;
+	}
+	//两个数相乘,科学计算法表示
+	public static BigDecimal multiply(BigDecimal b1,BigDecimal b2){
+		return b1.multiply(b2).stripTrailingZeros();
+	}
+}
+
+```
+
+> 花费的时间：126ms
+> 5000阶乘结果之和为：67698
+
+**高级版本**
+
+```
+
+```
