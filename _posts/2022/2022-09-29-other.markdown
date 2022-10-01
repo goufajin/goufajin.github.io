@@ -47,8 +47,85 @@ public class Teest {
 > 花费的时间：126ms
 > 5000阶乘结果之和为：67698
 
-**高级版本**
+**多线程版本**
 
 ```
+	private static class Factorial extends RecursiveTask<BigDecimal>{
+		private final static long serialVersionUID = 1L;
+		int start;
+		int end;
+		Factorial(int start,int end){
+			this.start = start;
+			this.end = end;
+		}
+		@Override
+		protected BigDecimal compute() {
+			BigDecimal res = BigDecimal.ONE;
+			if(end - start < 100){
+				for (int i = start; i <= end; i++) {
+					res = multiply(res,BigDecimal.valueOf(i));
+				}
+			}else {
+				int mid = (start + end) / 2;
+				Factorial left = new Factorial(start,mid);
+				Factorial right = new Factorial(mid+1 , end);
+				left.fork();
+				right.fork();
+				res = multiply(left.join() , right.join());
+			}
+			return res;
+		}
+	}
+	public static void main(String[] args) throws ExecutionException, InterruptedException {
+		long start = (new Date()).getTime();
+		Factorial facTask = new Factorial(1,5000);
+		ForkJoinPool forkJoinPool = new ForkJoinPool();
+		Future<BigDecimal> res = forkJoinPool.submit(facTask);
 
+		String str = res.get().toPlainString().replace("0","");
+//		int sum = 0;
+//		for (int i = 0; i < str.length(); i++) {
+//			sum += Character.getNumericValue(str.charAt(i));
+//		} 
+		Sum sumtask = new Sum(0,str.length(),str);
+		int sum =  forkJoinPool.submit(sumtask).get();
+		long end = (new Date()).getTime();
+		System.out.println("花费的时间："+(end - start) + "ms");
+		System.out.println("5000阶乘之和："+sum);
+
+	}
+	private static class Sum extends RecursiveTask<Integer>{
+		private final static long serialVersionUID = 1L;
+		int start;
+		int end;
+		String str;
+		Sum(int start,int end,String str){
+			this.start = start;
+			this.end = end;
+			this.str = str;
+		}
+		@Override
+		protected Integer compute() {
+			int sum = 0;
+			if(end - start < 5000){
+				for (int i = start; i < end; i++) {
+					sum += Character.getNumericValue(str.charAt(i));
+				}
+			}else {
+				int mid = (start + end) / 2;
+				Sum left = new Sum(start,mid,str);
+				Sum right = new Sum(mid , end,str);
+				left.fork();
+				right.fork();
+				sum = left.join() + right.join();
+			}
+			return sum;
+		}
+	}
+	//两个数相乘,科学计算法表示
+	public static BigDecimal multiply(BigDecimal b1,BigDecimal b2){
+		return b1.multiply(b2).stripTrailingZeros();
+	}
 ```
+> 花费的时间：59ms
+> 5000阶乘之和：67698
