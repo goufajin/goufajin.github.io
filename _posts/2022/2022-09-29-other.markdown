@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "求解5000阶乘之和"
-category: spring
+category: other
 date:   2022-09-229 23:55:35 +0200
 ---
 
