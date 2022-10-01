@@ -31,11 +31,6 @@ public class Teest {
 		System.out.println("5000阶乘结果之和为："+sum);
 
 	}
-
-	public static HashMap<Integer,BigDecimal> compute(int n){
-
-		return null;
-	}
 	//两个数相乘,科学计算法表示
 	public static BigDecimal multiply(BigDecimal b1,BigDecimal b2){
 		return b1.multiply(b2).stripTrailingZeros();
@@ -45,6 +40,7 @@ public class Teest {
 ```
 
 > 花费的时间：126ms
+>
 > 5000阶乘结果之和为：67698
 
 **多线程版本**
@@ -128,4 +124,5 @@ public class Teest {
 	}
 ```
 > 花费的时间：59ms
+>
 > 5000阶乘之和：67698
