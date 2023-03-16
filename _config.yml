@@ -71,6 +71,8 @@ navs:
         subLabel: SpringBoot
       - subHref: /springcloud.html
         subLabel: SpringCloud
+      - subHref: /springmvc.html
+        subLabel: SpringMVC
   - href: /
     label: 中间件
     target: _self
@@ -105,7 +107,7 @@ analytics:
 
 
 # For about.html. Fell free to create your own!
-skill_back_keywords: [Java8,Kotlin,Spring,Spring MVC,SpringBoot, Spring Cloud,  Struct2, Hibernet, MyBatis, JSP,Oracle, MySQL,PostgreSQL]
+skill_back_keywords: [Java8,Kotlin,Spring,Spring MVC,SpringBoot, Spring Cloud,  Struct2, Hibernet, MyBatis, JSP,Oracle, MySQL,PostgreSQL,HikariCP]
 skill_front_keywords: [HTML,CSS3,Boostrap,JavaScript,H5, JQuery, Ajax, Vue, Element-Ui ]
 skill_bigdata_keywords: [Hadoop,Kafka,ZooKeeper,Spark,Elasticsearch,Hive,Hbase]
 skill_mobile_app_keywords: [Android,Swift,Object-C]
